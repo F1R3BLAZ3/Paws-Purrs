@@ -4,18 +4,17 @@ from flask import jsonify
 import requests
 from . import app
 
-# Define a route to get dog data from The Dog API
-
 
 @app.route('/get_dog_images')
 def get_dog_images():
     """ The Dog API endpoint for random dog images"""
-    api_url = 'https://api.thedogapi.com/v1/images/search'
-    api_key = 'live_GeBIeu68rG3NZNLry3widTrMlCgl9k24TlDGFg0unSRs4geCUXqq5gIL1oqG9ILs'
+
+    endpoint = '/images/search'
+    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
 
     headers = {
         'Content-Type': 'application/json',
-        'x-api-key': api_key
+        'x-api-key': app.config['DOG_API_KEY']
     }
 
     try:
