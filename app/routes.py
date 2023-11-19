@@ -10,7 +10,7 @@ from . import app
 @app.route('/get_dog_images')
 def get_dog_images():
     """ The Dog API endpoint for random dog images"""
-    api_url = 'https://api.thedogapi.com/v1/images/searc'
+    api_url = 'https://api.thedogapi.com/v1/images/search'
     api_key = 'live_GeBIeu68rG3NZNLry3widTrMlCgl9k24TlDGFg0unSRs4geCUXqq5gIL1oqG9ILs'
 
     headers = {
