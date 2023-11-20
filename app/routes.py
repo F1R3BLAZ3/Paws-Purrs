@@ -1,12 +1,15 @@
 """Module for defining routes."""
 
-from flask import jsonify
+from flask import jsonify, render_template
 import requests
 from . import app
 
+@app.route('/')
+def home():
+    return render_template('home.html')
 
-@app.route('/get_dog_images')
-def get_dog_images():
+@app.route('/dog/images')
+def dog_images():
     """ The Dog API endpoint for random dog images"""
 
     endpoint = '/images/search'
@@ -20,11 +23,9 @@ def get_dog_images():
     try:
         response = requests.get(api_url, headers=headers, timeout=10)
 
-        if response.status_code == 200:
-            dog_data = response.json()
-            return jsonify(dog_data)
-        return jsonify(
-                {'error': f'Failed to fetch dog data. Status code: {response.status_code}'}
-            ), 500
+        response.raise_for_status()
+        dog_data = response.json()
+        return render_template('dog_images.html', dog_data=dog_data)
+        
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
