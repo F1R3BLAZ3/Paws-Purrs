@@ -6,6 +6,7 @@ from . import app
 
 @app.route('/')
 def home():
+    """Render the home page."""
     return render_template('home.html')
 
 @app.route('/dog/images')
