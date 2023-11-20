@@ -26,7 +26,7 @@ def dog_images():
 
         response.raise_for_status()
         dog_data = response.json()
-        return render_template('dog_images.html', dog_data=dog_data)
-        
+        # return render_template('dog_images.html', dog_data=dog_data)
+        return jsonify(dog_data)
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
