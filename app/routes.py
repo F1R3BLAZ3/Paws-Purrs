@@ -1,6 +1,7 @@
 """Module for defining routes."""
 
-from flask import jsonify, render_template, request
+import json
+from flask import jsonify, render_template, request, Response
 import requests
 from . import app
 
@@ -29,8 +30,10 @@ def dog_images():
         response.raise_for_status()
         dog_data = response.json()
 
+        formatted_data = json.dumps(dog_data, indent=2)
+
         #return render_template('dog_images.html', dog_data=dog_data)
-        return jsonify(dog_data)
+        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
@@ -49,8 +52,10 @@ def get_dog_image_info(image_id):
         response.raise_for_status()
         image_info = response.json()
 
+        formatted_data = json.dumps(image_info, indent=2)
+
         # return render_template('image_info.html', image_info=image_info)
-        return jsonify(image_info)
+        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
@@ -69,8 +74,10 @@ def analyze_dog_image(image_id):
         response.raise_for_status()
         analysis_data = response.json()
 
+        formatted_data = json.dumps(analysis_data, indent=2)
+
         # return render_template('image_analysis.html', analysis_data=analysis_data)
-        return jsonify(analysis_data)
+        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
@@ -89,8 +96,10 @@ def get_dog_image_breeds(image_id):
         response.raise_for_status()
         breeds_data = response.json()
 
+        formatted_data = json.dumps(breeds_data, indent=2)
+
         # return render_template('image_breeds.html', breeds_data=breeds_data)
-        return jsonify(breeds_data)
+        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
@@ -110,12 +119,14 @@ def get_random_dog_images():
         response.raise_for_status()
         dog_data = response.json()
 
+        formatted_data = json.dumps(dog_data, indent=2)
+
         # return render_template('dog_images.html', dog_data=dog_data)
-        return jsonify(dog_data)
+        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/dog/breeds')
+@app.route('/dog/breeds', methods=['GET'])
 def get_dog_breeds():
     """Route for getting a list of breeds"""
     endpoint = '/breeds'
@@ -130,12 +141,14 @@ def get_dog_breeds():
         response.raise_for_status()
         breeds_data = response.json()
 
+        formatted_data = json.dumps(breeds_data, indent=2)
+
         # return render_template('breeds.html', breeds_data=breeds_data)
-        return jsonify(breeds_data)
+        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/dog/breeds/<breed_id>')
+@app.route('/dog/breeds/<breed_id>', methods=['GET'])
 def get_breed_info(breed_id):
     """Route for getting information about a specific breed"""
     endpoint = f'/breeds/{breed_id}'
@@ -150,12 +163,14 @@ def get_breed_info(breed_id):
         response.raise_for_status()
         breed_info = response.json()
 
+        formatted_data = json.dumps(breed_info, indent=2)
+
         # return render_template('breed_info.html', breed_info=breed_info)
-        return jsonify(breed_info)
+        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/breeds/<breed_id>/facts')
+@app.route('/breeds/<breed_id>/facts', methods=['GET'])
 def get_breed_facts(breed_id):
     """Route for getting facts about a specific dog breed"""
     endpoint = f'/breeds/{breed_id}/facts'
@@ -170,12 +185,14 @@ def get_breed_facts(breed_id):
         response.raise_for_status()
         breed_facts = response.json()
 
+        formatted_data = json.dumps(breed_facts, indent=2)
+
         # return render_template('breed_facts.html', breed_facts=breed_facts)
-        return jsonify(breed_facts)
+        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/dog/breeds/search')
+@app.route('/dog/breeds/search', methods=['GET'])
 def search_dog_breeds():
     """Route for searching dog breeds"""
     search_query = request.args.get('q', '')  # Get the search query from the URL parameter 'q'
@@ -192,7 +209,9 @@ def search_dog_breeds():
         response.raise_for_status()
         search_results = response.json()
 
+        formatted_data = json.dumps(search_results, indent=2)
+
         # return render_template('breed_search_results.html', search_results=search_results)
-        return jsonify(search_results)
+        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
