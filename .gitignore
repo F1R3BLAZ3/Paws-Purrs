@@ -2,6 +2,7 @@
 __pycache__
 app/__pycache__
 
+
 # Other
 app/templates/dog_images.html
 app/.env
