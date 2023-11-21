@@ -14,9 +14,46 @@ def home():
 # depending on the functionality of the app
 @app.route('/dog/images', methods=['GET'])
 def dog_images():
-    """The Dog API endpoint for random dog images"""
+    """Retrieve random dog images from the Dog API."""
 
-    endpoint = '/images/search?size=med'
+    endpoint = '/images/search'
+    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
+
+    headers = {
+        'Content-Type': 'application/json',
+        'x-api-key': app.config['DOG_API_KEY']
+    }
+
+    # Define default values for parameters
+    size = request.args.get('size', 'med')
+    mime_types = request.args.get('mime_types', 'jpg')
+    image_format = request.args.get('format', 'json')
+    has_breeds = request.args.get('has_breeds', 'true')
+    order = request.args.get('order', 'RANDOM')
+    page = request.args.get('page', '0')
+    limit = request.args.get('limit', '1')
+
+    # Add parameters to the URL
+    api_url += f'?size={size}&mime_types={mime_types}&format={image_format}' \
+               f'&has_breeds={has_breeds}&order={order}&page={page}&limit={limit}'
+
+    try:
+        response = requests.get(api_url, headers=headers, timeout=30)
+
+        response.raise_for_status()
+        dog_data = response.json()
+
+        formatted_data = json.dumps(dog_data, indent=2)
+
+        #return render_template('dog_list.html', dog_data=dog_data)
+        return Response(response=formatted_data, content_type='application/json')
+    except requests.RequestException as e:
+        return jsonify({'error': f'Request failed: {str(e)}'}), 500
+
+@app.route('/dog/images/random', methods=['GET'])
+def get_random_dog_images():
+    """Retrieve random dog images from the Dog API."""
+    endpoint = '/images/search'
     api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
 
     headers = {
@@ -25,8 +62,7 @@ def dog_images():
     }
 
     try:
-        response = requests.get(api_url, headers=headers, timeout=10)
-
+        response = requests.get(api_url, headers=headers, timeout=30)
         response.raise_for_status()
         dog_data = response.json()
 
@@ -39,7 +75,7 @@ def dog_images():
 
 @app.route('/dog/images/<image_id>', methods=['GET'])
 def get_dog_image_info(image_id):
-    """Route for getting information about a specific dog image"""
+    """Retrieve information about a specific dog image."""
     endpoint = f'/images/{image_id}'
     api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
 
@@ -48,7 +84,7 @@ def get_dog_image_info(image_id):
     }
 
     try:
-        response = requests.get(api_url, headers=headers, timeout=10)
+        response = requests.get(api_url, headers=headers, timeout=30)
         response.raise_for_status()
         image_info = response.json()
 
@@ -61,7 +97,7 @@ def get_dog_image_info(image_id):
 
 @app.route('/dog/images/<image_id>/analysis', methods=['GET'])
 def analyze_dog_image(image_id):
-    """Route for analyzing a specific dog image"""
+    """Analyze a specific dog image."""
     endpoint = f'/images/{image_id}/analysis'
     api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
 
@@ -70,7 +106,7 @@ def analyze_dog_image(image_id):
     }
 
     try:
-        response = requests.get(api_url, headers=headers, timeout=10)
+        response = requests.get(api_url, headers=headers, timeout=30)
         response.raise_for_status()
         analysis_data = response.json()
 
@@ -83,7 +119,7 @@ def analyze_dog_image(image_id):
 
 @app.route('/dog/images/<image_id>/breeds', methods=['GET'])
 def get_dog_image_breeds(image_id):
-    """Route for getting breeds associated with a specific dog image"""
+    """Retrieve breeds associated with a specific dog image"""
     endpoint = f'/images/{image_id}/breeds'
     api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
 
@@ -92,7 +128,7 @@ def get_dog_image_breeds(image_id):
     }
 
     try:
-        response = requests.get(api_url, headers=headers, timeout=10)
+        response = requests.get(api_url, headers=headers, timeout=30)
         response.raise_for_status()
         breeds_data = response.json()
 
@@ -103,32 +139,9 @@ def get_dog_image_breeds(image_id):
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/dog/images/random', methods=['GET'])
-def get_random_dog_images():
-    """Route for getting random dog images"""
-    endpoint = '/images/search'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
-
-    headers = {
-        'Content-Type': 'application/json',
-        'x-api-key': app.config['DOG_API_KEY']
-    }
-
-    try:
-        response = requests.get(api_url, headers=headers, timeout=10)
-        response.raise_for_status()
-        dog_data = response.json()
-
-        formatted_data = json.dumps(dog_data, indent=2)
-
-        # return render_template('dog_images.html', dog_data=dog_data)
-        return Response(response=formatted_data, content_type='application/json')
-    except requests.RequestException as e:
-        return jsonify({'error': f'Request failed: {str(e)}'}), 500
-
 @app.route('/dog/breeds', methods=['GET'])
 def get_dog_breeds():
-    """Route for getting a list of breeds"""
+    """Retrieve a list of dog breeds."""
     endpoint = '/breeds'
     api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
 
@@ -136,8 +149,15 @@ def get_dog_breeds():
         'Content-Type': 'application/json',
     }
 
+    # Define default values for parameters
+    limit = request.args.get('limit', '30')
+    page = request.args.get('page', '0')
+
+    # Add parameters to the URL
+    api_url += f'?limit={limit}&page={page}'
+
     try:
-        response = requests.get(api_url, headers=headers, timeout=10)
+        response = requests.get(api_url, headers=headers, timeout=30)
         response.raise_for_status()
         breeds_data = response.json()
 
@@ -150,7 +170,7 @@ def get_dog_breeds():
 
 @app.route('/dog/breeds/<breed_id>', methods=['GET'])
 def get_breed_info(breed_id):
-    """Route for getting information about a specific breed"""
+    """Retrieve information about a specific dog breed."""
     endpoint = f'/breeds/{breed_id}'
     api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
 
@@ -159,7 +179,7 @@ def get_breed_info(breed_id):
     }
 
     try:
-        response = requests.get(api_url, headers=headers, timeout=10)
+        response = requests.get(api_url, headers=headers, timeout=30)
         response.raise_for_status()
         breed_info = response.json()
 
@@ -172,10 +192,9 @@ def get_breed_info(breed_id):
 
 @app.route('/dog/breeds/search', methods=['GET'])
 def search_dog_breeds():
-    """Route for searching dog breeds"""
-    search_query = request.args.get('q', '')  # Get the search query from the URL parameter 'q'
+    """Search for dog breeds."""
+    search_query = request.args.get('q', '')
 
-    # If the search query is empty, return an error response
     if not search_query:
         return jsonify({'error': 'Search query parameter "q" is required'}), 400
 
@@ -183,7 +202,7 @@ def search_dog_breeds():
     api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}?q={search_query}'
 
     try:
-        response = requests.get(api_url, timeout=10)
+        response = requests.get(api_url, timeout=30)
         response.raise_for_status()
         search_results = response.json()
 
