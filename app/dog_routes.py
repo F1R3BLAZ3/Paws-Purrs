@@ -170,28 +170,6 @@ def get_breed_info(breed_id):
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/breeds/<breed_id>/facts', methods=['GET'])
-def get_breed_facts(breed_id):
-    """Route for getting facts about a specific dog breed"""
-    endpoint = f'/breeds/{breed_id}/facts'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
-
-    headers = {
-        'Content-Type': 'application/json',
-    }
-
-    try:
-        response = requests.get(api_url, headers=headers, timeout=10)
-        response.raise_for_status()
-        breed_facts = response.json()
-
-        formatted_data = json.dumps(breed_facts, indent=2)
-
-        # return render_template('breed_facts.html', breed_facts=breed_facts)
-        return Response(response=formatted_data, content_type='application/json')
-    except requests.RequestException as e:
-        return jsonify({'error': f'Request failed: {str(e)}'}), 500
-
 @app.route('/dog/breeds/search', methods=['GET'])
 def search_dog_breeds():
     """Route for searching dog breeds"""

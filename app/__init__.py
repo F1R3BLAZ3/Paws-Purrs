@@ -18,4 +18,4 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 csrf = CSRFProtect(app)
 
-from app import routes, models
+from app import dog_routes, models
