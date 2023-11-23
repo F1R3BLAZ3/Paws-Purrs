@@ -7,13 +7,10 @@ from flask import Flask
 from flask_wtf.csrf import CSRFProtect
 from dotenv import load_dotenv
 from app.db_storage import DBStorage
+from app import dog_routes, models, routes
 # from flask_babel import Babel
 
-load_dotenv()
-
 app = Flask(__name__)
-
-from app import dog_routes, models
 
 load_dotenv()
 
