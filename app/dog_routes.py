@@ -1,4 +1,4 @@
-"""Module for defining routes."""
+"""Module for defining routes related to dogs."""
 
 import json
 from flask import jsonify, render_template, request, Response
