@@ -31,7 +31,7 @@ def dog_images():
     has_breeds = request.args.get('has_breeds', 'true')
     order = request.args.get('order', 'RANDOM')
     page = request.args.get('page', '0')
-    limit = request.args.get('limit', '1')
+    limit = request.args.get('limit', '16')
 
     # Add parameters to the URL
     api_url += f'?size={size}&mime_types={mime_types}&format={image_format}' \
@@ -42,11 +42,10 @@ def dog_images():
 
         response.raise_for_status()
         dog_data = response.json()
-
         formatted_data = json.dumps(dog_data, indent=2)
 
-        #return render_template('dog_list.html', dog_data=dog_data)
-        return Response(response=formatted_data, content_type='application/json')
+        return render_template('dog_list.html', dog_data=dog_data)
+        # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
