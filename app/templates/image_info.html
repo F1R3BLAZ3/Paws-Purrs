@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Dog Image Details{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block content %}
+<div class="details-container">
+    <img src="{{ image_info.url }}" alt="{{ image_info.breeds[0].name }}">
+    <div>
+        <h1 class="image_info_breed-name">{{ image_info.breeds[0].name }}</h1>
+        <h1>Details</h1>
+        <ul>
+            <li><strong>Bred for:</strong>
+                {% for temperament in image_info.breeds[0].bred_for.split(",") %}
+                <div class="tag">{{ temperament }}</div>
+            {% endfor %}
+            </li>
+            <li><strong>Breed group:</strong> {{ image_info.breeds[0].breed_group }}</li>
+            <li><strong>Life span:</strong> {{ image_info.breeds[0].life_span }}</li>
+            <li><strong>Temperament:</strong> 
+                {% for temperament in image_info.breeds[0].temperament.split(",") %}
+                    <div class="tag">{{ temperament }}</div>
+                {% endfor %}
+            </li>
+        </ul>
+        <h2>Measurements</h2>
+        <ul>
+            <li><strong>Weight:</strong> {{ image_info.breeds[0].weight.metric }}kgs</li>
+            <li><strong>Height:</strong> {{ image_info.breeds[0].height.metric }}cm</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

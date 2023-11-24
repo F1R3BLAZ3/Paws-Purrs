@@ -49,6 +49,7 @@ def dog_images():
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
+
 @app.route('/dog/images/random', methods=['GET'])
 def get_random_dog_images():
     """Retrieve random dog images from the Dog API."""
@@ -89,8 +90,8 @@ def get_dog_image_info(image_id):
 
         formatted_data = json.dumps(image_info, indent=2)
 
-        # return render_template('image_info.html', image_info=image_info)
-        return Response(response=formatted_data, content_type='application/json')
+        return render_template('image_info.html', image_info=image_info)
+        # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
@@ -149,7 +150,7 @@ def get_dog_breeds():
     }
 
     # Define default values for parameters
-    limit = request.args.get('limit', '30')
+    limit = request.args.get('limit', '400')
     page = request.args.get('page', '0')
 
     # Add parameters to the URL
@@ -162,8 +163,8 @@ def get_dog_breeds():
 
         formatted_data = json.dumps(breeds_data, indent=2)
 
-        # return render_template('breeds.html', breeds_data=breeds_data)
-        return Response(response=formatted_data, content_type='application/json')
+        return render_template('breeds.html', breeds_data=breeds_data)
+        # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
@@ -172,6 +173,12 @@ def get_breed_info(breed_id):
     """Retrieve information about a specific dog breed."""
     endpoint = f'/breeds/{breed_id}'
     api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
+    
+    size = request.args.get('size', 'med')
+    
+    images_endpoint = f'/images/search?breed_id={breed_id}&limit=5&size={size}'
+    images_api_url = f'{app.config["DOG_API_BASE_URL"]}{images_endpoint}'
+    
 
     headers = {
         'Content-Type': 'application/json',
@@ -181,11 +188,15 @@ def get_breed_info(breed_id):
         response = requests.get(api_url, headers=headers, timeout=30)
         response.raise_for_status()
         breed_info = response.json()
+        
+        images_response = requests.get(images_api_url, headers=headers, timeout=30)
+        images_response.raise_for_status()
+        images_info = images_response.json()
 
         formatted_data = json.dumps(breed_info, indent=2)
 
-        # return render_template('breed_info.html', breed_info=breed_info)
-        return Response(response=formatted_data, content_type='application/json')
+        return render_template('breed_info.html', breed_info=breed_info, images_info=images_info)
+        # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
