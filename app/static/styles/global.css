@@ -6,11 +6,7 @@ body {
     box-sizing: border-box;
     background-color: #000000;
     color: white;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    overflow: auto;
 }
 
 /* NAVBAR CSS */
@@ -26,6 +22,7 @@ nav {
 .logo {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .logo img {
@@ -38,7 +35,6 @@ nav {
     font-family: 'Pacifico', cursive; /* we will need to choose */
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 10px;
 }
 
 .auth-buttons {
@@ -93,3 +89,191 @@ nav {
     border: none;
     border-radius: 4px;
 }
+
+/* DOG LIST CSS */
+
+.header {
+    font-size: 60px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.subheader {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.dog-gallery-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.dog-card {
+    position: relative; 
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.dog-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: 8px;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6); 
+    padding: 10px;
+    color: white; 
+}
+
+.breed-name {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Image Info CSS */
+.details-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 2em;
+    padding: 30px;
+}
+
+.details-container img {
+    max-width: 50%;
+    border-radius: 8px;
+}
+
+.details-container div {
+    max-width: 50%;
+    margin: auto;
+    justify-content: center;
+}
+
+.details-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.details-container li {
+    margin-bottom: 1em;
+}
+
+.image_info_breed-name {
+    text-align: center;
+    font-size: 50px;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #2647aa;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 3px;
+}
+
+/* BREEDS CSS */
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+}
+
+.grid-item {
+    background-color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 18px;
+    font-size: 18px;
+    margin: 10px;
+    color: white;
+    height: 30px;
+    font-size: 20px;
+    border-radius: 8px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.breed-link {
+    text-decoration: none;
+    color: inherit; 
+}
+
+.grid-item .breed-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 2px; 
+    margin-top: 20px; 
+}
+
+.grid-item p:not(.breed-name) {
+    font-weight: 100; 
+    margin-top: 2px; 
+}
+
+#searchBar {
+    width: 100%;
+    height: 50px;
+    background-color: #2647aa; 
+    color: white; 
+    border: none;
+    font-size: 20px; 
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* BREED INFO CSS */
+.details-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2em;
+}
+.details-container img {
+    max-width: 50%;
+}
+.details-container div {
+    max-width: 50%;
+}
+.details-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+.details-container li {
+    margin-bottom: 1em;
+}
+.image_info_breed-name {
+    text-align: center;
+    font-size: 2em;
+    text-decoration: underline;
+}
+.tag {
+    display: inline-block;
+    background-color: #2647aa;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 8px;
+}
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 2em;
+}
+.image-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+

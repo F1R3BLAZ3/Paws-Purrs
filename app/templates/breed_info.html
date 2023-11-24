@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Dog Image Details{% endblock %}
+
+{% block styles %}
+<!-- Your styles here -->
+{% endblock %}
+
+{% block content %}
+<div class="details-container">
+    <img src="{{ images_info[0].url }}" alt="{{ breed_info.name }}">
+    <div>
+        <h1 class="breed_info_breed-name">{{ breed_info.name }}</h1>
+        <h2>Details</h2>
+        <ul>
+            <li><strong>Origin:</strong> {{ breed_info.origin }}</li>
+            <li><strong>Bred for:</strong>
+                {% for temperament in breed_info.bred_for.split(",") %}
+                <div class="tag">{{ temperament }}</div>
+            {% endfor %}
+            </li>
+            <li><strong>Breed group:</strong> {{ breed_info.breed_group }}</li>
+            <li><strong>Life span:</strong> {{ breed_info.life_span }}</li>
+            <li><strong>Temperament:</strong> 
+                {% for temperament in breed_info.temperament.split(",") %}
+                    <div class="tag">{{ temperament }}</div>
+                {% endfor %}
+            </li>
+        </ul>
+        <h2>Measurements</h2>
+        <ul>
+            <li><strong>Weight:</strong> {{ breed_info.weight.metric }}kgs</li>
+            <li><strong>Height:</strong> {{ breed_info.height.metric }}cm</li>
+        </ul>
+    </div>
+</div>
+<div class="image-grid">
+    {% for image in images_info[1:] %}
+    <img src="{{ image.url }}" alt="{{ breed_info.name }}">
+    {% endfor %}
+</div>
+{% endblock %}

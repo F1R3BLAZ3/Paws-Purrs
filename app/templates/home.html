@@ -3,9 +3,6 @@
 {% block title %}Home{% endblock %}
 
 {% block styles %}
-    <!-- Additional styles specific to the home page go here -->
-    <link rel="stylesheet" type="text/css" href="css/home_styles.css">
-    <!-- Include this in the <head> section of your HTML file -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico|Dancing+Script|Lobster|Great+Vibes|Calligraffitti&display=swap">
 
 {% endblock %}
@@ -28,8 +25,8 @@
                 Enjoy the journey, fellow pet lover! 🐶🐱
             </p>
             <div class="browse-buttons">
-                <button onclick="location.href='/browse/cats'">Browse Cats</button>
-                <button onclick="location.href='/browse/dogs'">Browse Dogs</button>
+                <button onclick="location.href='/browse/cats'">Cat Gallery</button>
+                <button onclick="location.href='{{url_for('dog_images')}}'">Dog Gallery</button>
             </div>
         </div>
         <div class="right-section">
