@@ -3,14 +3,13 @@
 <html>
 <head>
     <!-- CSS links come here -->
-    <!-- <link rel="stylesheet" type="text/css" href="../static/styles/global.css"> -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/global.css') }}">
 </head>
 <body>
     <!-- Shared component goes here -->
     <nav>
         <div class="logo" onclick="location.href='{{url_for('home')}}'">
-            <img src="../static/images/logo.png" alt="Company Logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Company Logo">
             <div class="company-name">Paws&Purrs</div>
         </div>
 
