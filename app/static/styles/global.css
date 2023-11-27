@@ -191,8 +191,8 @@ nav {
 }
 
 .grid-item {
-    background-color: #333;
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    background-color: #161B1C;
+    border: 1px solid gray;
     padding: 18px;
     font-size: 18px;
     margin: 10px;
@@ -277,3 +277,23 @@ nav {
     border-radius: 8px;
 }
 
+/* PREV AND NEXT ARROWS */
+.navigation {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.navigation a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.navigation img {
+    width: 50px;
+    height: 50px;
+}

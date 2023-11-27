@@ -8,6 +8,7 @@
 
 {% block content %}
 <div class="details-container">
+    <!-- <img src="{{ images_info[0].url }}" alt="{{ breed_info.name }}" style="width: 730px; height: 547px; object-fit: cover;"> -->
     <img src="{{ images_info[0].url }}" alt="{{ breed_info.name }}">
     <div>
         <h1 class="breed_info_breed-name">{{ breed_info.name }}</h1>
@@ -36,7 +37,19 @@
 </div>
 <div class="image-grid">
     {% for image in images_info[1:] %}
-    <img src="{{ image.url }}" alt="{{ breed_info.name }}">
+    <img src="{{ image.url }}" alt="{{ breed_info.name }}" style="width: 369px; height: 244px; object-fit: cover;">
     {% endfor %}
+</div>
+<div class="navigation">
+    {% if prev_breed_id %}
+    <a href="{{ url_for('get_breed_info', breed_id=prev_breed_id) }}">
+        <img src="{{ url_for('static', filename='images/back.png') }}" alt="Previous Breed">
+    </a>
+    {% endif %}
+    {% if next_breed_id %}
+    <a href="{{ url_for('get_breed_info', breed_id=next_breed_id) }}">
+        <img src="{{ url_for('static', filename='images/next.png') }}" alt="Next Breed">
+    </a>
+    {% endif %}
 </div>
 {% endblock %}
