@@ -5,19 +5,14 @@ from flask import jsonify, render_template, request, Response
 import requests
 from . import app
 
-@app.route('/')
-def home():
-    """Render the home page."""
-    return render_template('home.html')
-
-# This route can be altered later to request dog images in a specific order,
+# This route can be altered later to request cat images in a specific order,
 # depending on the functionality of the app
-@app.route('/dog/images', methods=['GET'])
-def dog_images():
-    """Retrieve random dog images from the Dog API."""
+@app.route('/cat/images', methods=['GET'])
+def cat_images():
+    """Retrieve random cat images from the Cat API."""
 
     endpoint = '/images/search'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
+    api_url = f'{app.config["CAT_API_BASE_URL"]}{endpoint}'
 
     headers = {
         'Content-Type': 'application/json',
@@ -44,40 +39,16 @@ def dog_images():
         dog_data = response.json()
         formatted_data = json.dumps(dog_data, indent=2)
 
-        return render_template('dog_list.html', dog_data=dog_data)
-        # return Response(response=formatted_data, content_type='application/json')
-    except requests.RequestException as e:
-        return jsonify({'error': f'Request failed: {str(e)}'}), 500
-
-
-@app.route('/dog/images/random', methods=['GET'])
-def get_random_dog_images():
-    """Retrieve random dog images from the Dog API."""
-    endpoint = '/images/search'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
-
-    headers = {
-        'Content-Type': 'application/json',
-        'x-api-key': app.config['API_KEY']
-    }
-
-    try:
-        response = requests.get(api_url, headers=headers, timeout=30)
-        response.raise_for_status()
-        dog_data = response.json()
-
-        formatted_data = json.dumps(dog_data, indent=2)
-
-        #return render_template('dog_images.html', dog_data=dog_data)
+        # return render_template('dog_list.html', dog_data=dog_data)
         return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/dog/images/<image_id>', methods=['GET'])
-def get_dog_image_info(image_id):
-    """Retrieve information about a specific dog image."""
+@app.route('/cat/images/<image_id>', methods=['GET'])
+def get_cat_image_info(image_id):
+    """Retrieve information about a specific cat image."""
     endpoint = f'/images/{image_id}'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
+    api_url = f'{app.config["CAT_API_BASE_URL"]}{endpoint}'
 
     headers = {
         'x-api-key': app.config['API_KEY']
@@ -90,16 +61,16 @@ def get_dog_image_info(image_id):
 
         formatted_data = json.dumps(image_info, indent=2)
 
-        return render_template('image_info.html', image_info=image_info)
-        # return Response(response=formatted_data, content_type='application/json')
+        # return render_template('image_info.html', image_info=image_info)
+        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/dog/images/<image_id>/analysis', methods=['GET'])
-def analyze_dog_image(image_id):
-    """Analyze a specific dog image."""
+@app.route('/cat/images/<image_id>/analysis', methods=['GET'])
+def analyze_cat_image(image_id):
+    """Analyze a specific cat image."""
     endpoint = f'/images/{image_id}/analysis'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
+    api_url = f'{app.config["CAT_API_BASE_URL"]}{endpoint}'
 
     headers = {
         'x-api-key': app.config['API_KEY']
@@ -117,11 +88,11 @@ def analyze_dog_image(image_id):
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/dog/images/<image_id>/breeds', methods=['GET'])
-def get_dog_image_breeds(image_id):
-    """Retrieve breeds associated with a specific dog image"""
+@app.route('/cat/images/<image_id>/breeds', methods=['GET'])
+def get_cat_image_breeds(image_id):
+    """Retrieve breeds associated with a specific cat image"""
     endpoint = f'/images/{image_id}/breeds'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
+    api_url = f'{app.config["CAT_API_BASE_URL"]}{endpoint}'
 
     headers = {
         'Content-Type': 'application/json',
@@ -139,11 +110,11 @@ def get_dog_image_breeds(image_id):
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/dog/breeds', methods=['GET'])
-def get_dog_breeds():
-    """Retrieve a list of dog breeds."""
+@app.route('/cat/breeds', methods=['GET'])
+def get_cat_breeds():
+    """Retrieve a list of cat breeds."""
     endpoint = '/breeds'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
+    api_url = f'{app.config["CAT_API_BASE_URL"]}{endpoint}'
 
     headers = {
         'Content-Type': 'application/json',
@@ -163,22 +134,22 @@ def get_dog_breeds():
 
         formatted_data = json.dumps(breeds_data, indent=2)
 
-        return render_template('breeds.html', breeds_data=breeds_data)
-        # return Response(response=formatted_data, content_type='application/json')
+        # return render_template('cat_breeds_list.html', breeds_data=breeds_data)
+        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/dog/breeds/<int:breed_id>', methods=['GET'])
-def get_breed_info(breed_id):
-    """Retrieve information about a specific dog breed."""
+@app.route('/cat/breeds/<int:breed_id>', methods=['GET'])
+def get_cat_breed_info(breed_id):
+    """Retrieve information about a specific cat breed."""
     endpoint = f'/breeds/{breed_id}'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
-    
+    api_url = f'{app.config["CAT_API_BASE_URL"]}{endpoint}'
+
     size = request.args.get('size', 'med')
-    
+
     images_endpoint = f'/images/search?breed_id={breed_id}&limit=5&size={size}'
-    images_api_url = f'{app.config["DOG_API_BASE_URL"]}{images_endpoint}'
-    
+    images_api_url = f'{app.config["CAT_API_BASE_URL"]}{images_endpoint}'
+
 
     headers = {
         'Content-Type': 'application/json',
@@ -188,31 +159,32 @@ def get_breed_info(breed_id):
         response = requests.get(api_url, headers=headers, timeout=30)
         response.raise_for_status()
         breed_info = response.json()
-        
+
         images_response = requests.get(images_api_url, headers=headers, timeout=30)
         images_response.raise_for_status()
         images_info = images_response.json()
 
         formatted_data = json.dumps(breed_info, indent=2)
-        
+
         next_breed_id = breed_id + 1
         prev_breed_id = breed_id - 1 if breed_id > 1 else None
 
-        return render_template('breed_info.html', breed_info=breed_info, images_info=images_info, next_breed_id=next_breed_id, prev_breed_id=prev_breed_id)
-        # return Response(response=formatted_data, content_type='application/json')
+        # return render_template('breed_info.html', breed_info=breed_info, images_info=images_info,
+                               #next_breed_id=next_breed_id, prev_breed_id=prev_breed_id)
+        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/dog/breeds/search', methods=['GET'])
-def search_dog_breeds():
-    """Search for dog breeds."""
+@app.route('/cat/breeds/search', methods=['GET'])
+def search_cat_breeds():
+    """Search for cat breeds."""
     search_query = request.args.get('q', '')
 
     if not search_query:
         return jsonify({'error': 'Search query parameter "q" is required'}), 400
 
     endpoint = '/breeds/search'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}?q={search_query}'
+    api_url = f'{app.config["CAT_API_BASE_URL"]}{endpoint}?q={search_query}'
 
     try:
         response = requests.get(api_url, timeout=30)

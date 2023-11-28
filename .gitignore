@@ -5,3 +5,4 @@ app/__pycache__
 # Other
 app/templates/dog_images.html
 app/.env
+app/templates/cat_breeds_list.html
