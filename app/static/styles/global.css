@@ -17,6 +17,10 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
 }
 
 .logo {
@@ -238,7 +242,7 @@ nav {
 .details-container {
     display: flex;
     justify-content: space-between;
-    margin-top: 2em;
+    padding-top: 50px;
 }
 .details-container img {
     max-width: 50%;
@@ -269,7 +273,8 @@ nav {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
-    margin-top: 2em;
+    /* margin-top: 2em; */
+    margin-bottom: 2em;
 }
 .image-grid img {
     width: 100%;
@@ -280,20 +285,63 @@ nav {
 /* PREV AND NEXT ARROWS */
 .navigation {
     position: fixed;
-    top: 50%;
+    bottom: 0;
     left: 0;
     right: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 10px;
+    background-color: #2647aa;
 }
 
 .navigation a {
     color: #fff;
     text-decoration: none;
+    margin-left:10px;
+    margin-right: 10px;
 }
 
 .navigation img {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
 }
+
+/* BREEDS MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+  }
+  
+  .modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+  }
+  
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
