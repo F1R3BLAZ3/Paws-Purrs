@@ -21,7 +21,7 @@ def dog_images():
 
     headers = {
         'Content-Type': 'application/json',
-        'x-api-key': app.config['API_KEY']
+        'x-api-key': app.config['DOG_API_KEY']
     }
 
     # Define default values for parameters
@@ -58,7 +58,7 @@ def get_random_dog_images():
 
     headers = {
         'Content-Type': 'application/json',
-        'x-api-key': app.config['API_KEY']
+        'x-api-key': app.config['DOG_API_KEY']
     }
 
     try:
@@ -80,7 +80,7 @@ def get_dog_image_info(image_id):
     api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
 
     headers = {
-        'x-api-key': app.config['API_KEY']
+        'x-api-key': app.config['DOG_API_KEY']
     }
 
     try:
@@ -102,7 +102,7 @@ def analyze_dog_image(image_id):
     api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
 
     headers = {
-        'x-api-key': app.config['API_KEY']
+        'x-api-key': app.config['DOG_API_KEY']
     }
 
     try:

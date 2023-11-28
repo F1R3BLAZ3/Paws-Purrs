@@ -16,7 +16,7 @@ def cat_images():
 
     headers = {
         'Content-Type': 'application/json',
-        'x-api-key': app.config['API_KEY']
+        'x-api-key': app.config['CAT_API_KEY']
     }
 
     # Define default values for parameters
@@ -51,7 +51,7 @@ def get_cat_image_info(image_id):
     api_url = f'{app.config["CAT_API_BASE_URL"]}{endpoint}'
 
     headers = {
-        'x-api-key': app.config['API_KEY']
+        'x-api-key': app.config['CAT_API_KEY']
     }
 
     try:
@@ -73,7 +73,7 @@ def analyze_cat_image(image_id):
     api_url = f'{app.config["CAT_API_BASE_URL"]}{endpoint}'
 
     headers = {
-        'x-api-key': app.config['API_KEY']
+        'x-api-key': app.config['CAT_API_KEY']
     }
 
     try:
