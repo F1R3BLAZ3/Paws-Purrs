@@ -26,11 +26,21 @@
         <h1 class="breed_info_breed-name">{{ breed_info.name }}</h1>
         <h2>Details</h2>
         <ul>
-            <li><strong>Origin:</strong> {{ breed_info.origin }}</li>
+            <li><strong>Origin:</strong>
+                {% if breed_info.origin %}
+                {{ breed_info.origin }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </li>
             <li><strong>Bred for:</strong>
-                {% for temperament in breed_info.bred_for.split(",") %}
-                <div class="tag">{{ temperament }}</div>
-            {% endfor %}
+                {% if breed_info.bred_for %}
+                    {% for temperament in breed_info.bred_for.split(",") %}
+                        <div class="tag">{{ temperament }}</div>
+                    {% endfor %}
+                {% else %}
+                    N/A
+                {% endif %}
             </li>
             <li><strong>Breed group:</strong> {{ breed_info.breed_group }}</li>
             <li><strong>Life span:</strong> {{ breed_info.life_span }}</li>
