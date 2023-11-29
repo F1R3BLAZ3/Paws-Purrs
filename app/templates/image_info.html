@@ -8,29 +8,61 @@
 
 {% block content %}
 <div class="details-container">
-    <img src="{{ image_info.url }}" alt="{{ image_info.breeds[0].name }}">
+    {% if image_info %}
+        <img src="{{ image_info.url }}" alt="{{ image_info.breeds[0].name }}">
+    {% else %}      
+        <img src="{{ url_for('static', filename='images/dog404.png') }}" alt="No Cat Image">
+    {% endif %}
+
     <div>
         <h1 class="image_info_breed-name">{{ image_info.breeds[0].name }}</h1>
-        <h1>Details</h1>
+        <h1 style="text-decoration: underline">Details</h1>
         <ul>
             <li><strong>Bred for:</strong>
-                {% for temperament in image_info.breeds[0].bred_for.split(",") %}
-                <div class="tag">{{ temperament }}</div>
-            {% endfor %}
+                {% if image_info.breeds[0].bred_for %}
+                    {% for temperament in image_info.breeds[0].bred_for.split(",") %}
+                        {% set words = temperament.strip().capitalize().split() %}
+                        {% if words|length > 2 %}
+                            <div class="tag">{{ words[:5]|join(' ') }}</div>
+                        {% else %}
+                            <div class="tag">{{ temperament.strip().capitalize().rstrip('.') }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    N/A
+                {% endif %}
             </li>
             <li><strong>Breed group:</strong> {{ image_info.breeds[0].breed_group }}</li>
             <li><strong>Life span:</strong> {{ image_info.breeds[0].life_span }}</li>
-            <li><strong>Temperament:</strong> 
-                {% for temperament in image_info.breeds[0].temperament.split(",") %}
-                    <div class="tag">{{ temperament }}</div>
-                {% endfor %}
-            </li>
+            <li><strong>Temperament:</strong>
+                {% if 'temperament' in image_info.breeds[0] %}
+                    {% set temperament_list = image_info.breeds[0].temperament.split(",") %}
+                    {% for temperament in temperament_list[:5] %} <!-- Change the number of tags displayed here -->
+                        <div class="tag">{{ temperament }}</div>
+                    {% endfor %}
+                {% else %}
+                    N/A 
+                {% endif %}
+            </li> 
         </ul>
-        <h2>Measurements</h2>
-        <ul>
-            <li><strong>Weight:</strong> {{ image_info.breeds[0].weight.metric }}kgs</li>
-            <li><strong>Height:</strong> {{ image_info.breeds[0].height.metric }}cm</li>
-        </ul>
+        <h2 style="text-decoration: underline">Measurements</h2>
+        <table>
+            <tr>
+                <th></th>
+                <th>Imperial</th>
+                <th>Metric</th>
+            </tr>
+            <tr>    
+                <td><strong>Weight:</strong></td>
+                <td>{{ image_info.breeds[0].weight.imperial }} lb</td>
+                <td>{{ image_info.breeds[0].weight.metric }} kg</td>
+            </tr>
+            <tr>
+                <td><strong>Height:</strong></td>
+                <td>{{ image_info.breeds[0].height.imperial }} inch</td>
+                <td>{{ image_info.breeds[0].height.metric }} cm</td>
+            </tr>
+        </table>
     </div>
 </div>
 {% endblock %}

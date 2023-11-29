@@ -65,6 +65,7 @@ nav {
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 70px;
 }
 
 .left-section {
@@ -100,6 +101,7 @@ nav {
     font-size: 60px;
     text-align: center;
     margin-bottom: 20px;
+    margin-top: 100px;
 }
 
 .subheader {
@@ -187,6 +189,21 @@ nav {
     border-radius: 3px;
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #2647aa;
+    color: white;
+}
+
 /* BREEDS CSS */
 .grid-container {
     display: grid;
@@ -235,7 +252,7 @@ nav {
     border: none;
     font-size: 20px; 
     padding: 10px;
-    margin-top: 20px;
+    margin-top: 80px;
 }
 
 /* BREED INFO CSS */
@@ -269,9 +286,11 @@ nav {
     display: inline-block;
     background-color: #2647aa;
     padding: 5px;
-    margin: 2px;
+    /* margin: 2px; */
     border-radius: 8px;
+    margin-top: 15px;
 }
+
 .image-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

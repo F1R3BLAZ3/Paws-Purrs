@@ -22,13 +22,13 @@
 
 <div class="details-container">
     {% if images_info %}
-        <img src="{{ images_info[0].url }}" alt="{{ breed_info.name }}">
+        <img style="cursor: pointer;" src="{{ images_info[0].url }}" alt="{{ breed_info.name }}" onclick="openModal('{{ images_info[0].url }}')">
     {% else %}
-        <p>No images available</p>
+        <img src="{{ url_for('static', filename='images/dog404.png') }}" alt="No Dog Image">
     {% endif %}
     <div>
         <h1 class="breed_info_breed-name">{{ breed_info.name }}</h1>
-        <h2>Details</h2>
+        <h2 style="text-decoration: underline">Details</h2>
         <ul>
             <li><strong>Origin:</strong>
                 {% if breed_info.origin %}
@@ -37,44 +37,54 @@
                     N/A
                 {% endif %}
             </li>
+
             <li><strong>Bred for:</strong>
                 {% if breed_info.bred_for %}
                     {% for temperament in breed_info.bred_for.split(",") %}
-                    <div class="tag">{{ temperament.strip().capitalize() }}</div>
-                {% endfor %}
-                {% else %}
-                    N/A
-                {% endif %}
-            </li>
-            <li><strong>Breed group:</strong> {{ breed_info.breed_group }}</li>
-            <li><strong>Life span:</strong> {{ breed_info.life_span }}</li>
-            <li><strong>Temperament:</strong> 
-                {% if 'temperament' in breed_info %}
-                    {% for temperament in breed_info.temperament.split(",") %}
-                        <div class="tag">{{ temperament }}</div>
+                        {% set words = temperament.strip().capitalize().split() %}
+                        {% if words|length > 2 %}
+                            <div class="tag">{{ words[:5]|join(' ') }}</div>
+                        {% else %}
+                            <div class="tag">{{ temperament.strip().capitalize().rstrip('.') }}</div>
+                        {% endif %}
                     {% endfor %}
                 {% else %}
                     N/A
                 {% endif %}
             </li>
+
+            <li><strong>Breed group:</strong> {{ breed_info.breed_group }}</li>
+            <li><strong>Life span:</strong> {{ breed_info.life_span }}</li>
+            <li><strong>Temperament:</strong>
+                {% if 'temperament' in breed_info %}
+                    {% set temperament_list = breed_info.temperament.split(",") %}
+                     <!-- In case the number of tags displayed is not satisfactory, you can change them here -->
+                    {% for temperament in temperament_list[:5] %}
+                        <div class="tag">{{ temperament }}</div>
+                    {% endfor %}
+                {% else %}
+                    N/A 
+                {% endif %}
+            </li>          
         </ul>
-        <h2>Measurements</h2>
-        <ul>
-            <li>
-                <h3>Weight:</h3>
-                <ul>
-                    <li><strong>Imperial:</strong> {{ breed_info.weight.imperial }} lb</li>
-                    <li><strong>Metric:</strong> {{ breed_info.weight.metric }} kg</li>
-                </ul>
-            </li>
-            <li>
-                <h3>Height:</h3>
-                <ul>
-                    <li><strong>Imperial:</strong> {{ breed_info.height.imperial }} inch</li>
-                    <li><strong>Metric:</strong> {{ breed_info.height.metric }} cm</li>
-                </ul>
-            </li>
-        </ul>
+        <h2 style="text-decoration: underline">Measurements</h2>
+        <table>
+            <tr>
+                <th></th>
+                <th>Imperial</th>
+                <th>Metric</th>
+            </tr>
+            <tr>    
+                <td><strong>Weight:</strong></td>
+                <td>{{ breed_info.weight.imperial }} lb</td>
+                <td>{{ breed_info.weight.metric }} kg</td>
+            </tr>
+            <tr>
+                <td><strong>Height:</strong></td>
+                <td>{{ breed_info.height.imperial }} inch</td>
+                <td>{{ breed_info.height.metric }} cm</td>
+            </tr>
+        </table>
     </div>
 </div>
 <div class="image-grid">
