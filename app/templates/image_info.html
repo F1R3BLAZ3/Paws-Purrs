@@ -13,23 +13,50 @@
         <h1 class="image_info_breed-name">{{ image_info.breeds[0].name }}</h1>
         <h1>Details</h1>
         <ul>
+            <li><strong>Origin:</strong>
+                {% if image_info.breeds[0].origin %}
+                    {{ image_info.breeds[0].origin }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </li>
             <li><strong>Bred for:</strong>
-                {% for temperament in image_info.breeds[0].bred_for.split(",") %}
-                <div class="tag">{{ temperament }}</div>
-            {% endfor %}
+                {% if image_info.breeds[0].bred_for %}
+                    {% for temperament in image_info.breeds[0].bred_for.split(",") %}
+                        <div class="tag">{{ temperament.strip().capitalize() }}</div>
+                    {% endfor %}
+                {% else %}
+                    N/A
+                {% endif %}
             </li>
             <li><strong>Breed group:</strong> {{ image_info.breeds[0].breed_group }}</li>
             <li><strong>Life span:</strong> {{ image_info.breeds[0].life_span }}</li>
-            <li><strong>Temperament:</strong> 
-                {% for temperament in image_info.breeds[0].temperament.split(",") %}
-                    <div class="tag">{{ temperament }}</div>
-                {% endfor %}
+            <li><strong>Temperament:</strong>
+                {% if 'temperament' in image_info.breeds[0] %}
+                    {% for temperament in image_info.breeds[0].temperament.split(",") %}
+                        <div class="tag">{{ temperament }}</div>
+                    {% endfor %}
+                {% else %}
+                    N/A
+                {% endif %}
             </li>
         </ul>
         <h2>Measurements</h2>
         <ul>
-            <li><strong>Weight:</strong> {{ image_info.breeds[0].weight.metric }}kgs</li>
-            <li><strong>Height:</strong> {{ image_info.breeds[0].height.metric }}cm</li>
+            <li>
+                <h3>Weight:</h3>
+                <ul>
+                    <li><strong>Imperial:</strong> {{ image_info.breeds[0].weight.imperial }} lb</li>
+                    <li><strong>Metric:</strong> {{ image_info.breeds[0].weight.metric }} kg</li>
+                </ul>
+            </li>
+            <li>
+                <h3>Height:</h3>
+                <ul>
+                    <li><strong>Imperial:</strong> {{ image_info.breeds[0].height.imperial }} inch</li>
+                    <li><strong>Metric:</strong> {{ image_info.breeds[0].height.metric }} cm</li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
