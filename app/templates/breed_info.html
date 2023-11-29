@@ -41,7 +41,7 @@
                 {% if breed_info.bred_for %}
                     {% for temperament in breed_info.bred_for.split(",") %}
                     <div class="tag">{{ temperament.strip().capitalize() }}</div>
-                {% endfor %}    
+                {% endfor %}
                 {% else %}
                     N/A
                 {% endif %}
