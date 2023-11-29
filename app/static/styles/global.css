@@ -246,6 +246,9 @@ nav {
 }
 .details-container img {
     max-width: 50%;
+    object-fit: contain;
+    height: 490px;
+    width: 100%; 
 }
 .details-container div {
     max-width: 50%;
@@ -274,7 +277,7 @@ nav {
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
     /* margin-top: 2em; */
-    margin-bottom: 2em;
+    margin-bottom: 4em;
 }
 .image-grid img {
     width: 100%;
