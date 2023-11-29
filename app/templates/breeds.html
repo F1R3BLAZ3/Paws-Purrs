@@ -24,22 +24,46 @@
 function searchFunction() {
     // Get the input field and its value
     var input = document.getElementById('searchBar');
-    var filter = input.value.toUpperCase();
+    var filter = input.value;
 
-    // Get the breed list container and its children
-    var container = document.getElementById('breedList');
-    var items = container.getElementsByClassName('grid-item');
+    // Make an AJAX call to your search route
+    fetch('/dog/breeds/search?q=' + filter)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            // Clear the breed list container
+            var container = document.getElementById('breedList');
+            container.innerHTML = '';
 
-    // Loop through all list items, and hide those who don't match the search query
-    for (var i = 0; i < items.length; i++) {
-        var breedName = items[i].getElementsByClassName('breed-name')[0];
-        var txtValue = breedName.textContent || breedName.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            items[i].style.display = "";
-        } else {
-            items[i].style.display = "none";
-        }
-    }
+            // Loop through the search results and add them to the breed list container
+            for (var i = 0; i < data.length; i++) {
+                var breed = data[i];
+
+                var breedLink = document.createElement('a');
+                breedLink.href = '/breeds/' + breed.id;
+                breedLink.className = 'breed-link';
+
+                var gridItem = document.createElement('div');
+                gridItem.className = 'grid-item';
+
+                var breedName = document.createElement('p');
+                breedName.className = 'breed-name';
+                breedName.textContent = breed.name;
+
+                var breedOrigin = document.createElement('p');
+                breedOrigin.textContent = breed.origin;
+
+                gridItem.appendChild(breedName);
+                gridItem.appendChild(breedOrigin);
+                breedLink.appendChild(gridItem);
+                container.appendChild(breedLink);
+            }
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+        });
 }
+
 </script>
 {% endblock %}
