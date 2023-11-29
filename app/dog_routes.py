@@ -173,12 +173,12 @@ def get_breed_info(breed_id):
     """Retrieve information about a specific dog breed."""
     endpoint = f'/breeds/{breed_id}'
     api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
-    
+
     size = request.args.get('size', 'med')
-    
+
     images_endpoint = f'/images/search?breed_id={breed_id}&limit=5&size={size}'
     images_api_url = f'{app.config["DOG_API_BASE_URL"]}{images_endpoint}'
-    
+
 
     headers = {
         'Content-Type': 'application/json',
@@ -188,17 +188,18 @@ def get_breed_info(breed_id):
         response = requests.get(api_url, headers=headers, timeout=30)
         response.raise_for_status()
         breed_info = response.json()
-        
+
         images_response = requests.get(images_api_url, headers=headers, timeout=30)
         images_response.raise_for_status()
         images_info = images_response.json()
 
         formatted_data = json.dumps(breed_info, indent=2)
-        
+
         next_breed_id = breed_id + 1
         prev_breed_id = breed_id - 1 if breed_id > 1 else None
 
-        return render_template('breed_info.html', breed_info=breed_info, images_info=images_info, next_breed_id=next_breed_id, prev_breed_id=prev_breed_id)
+        return render_template('breed_info.html', breed_info=breed_info, images_info=images_info,
+                               next_breed_id=next_breed_id, prev_breed_id=prev_breed_id)
         # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
