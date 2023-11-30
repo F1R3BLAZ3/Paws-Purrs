@@ -21,6 +21,7 @@ nav {
     top: 0;
     right: 0;
     left: 0;
+    z-index: 10;
 }
 
 .logo {
@@ -176,11 +177,6 @@ nav {
     margin-bottom: 1em;
 }
 
-.image_info_breed-name {
-    text-align: center;
-    font-size: 50px;
-}
-
 .tag {
     display: inline-block;
     background-color: #2647aa;
@@ -215,7 +211,6 @@ th {
     background-color: #161B1C;
     border: 1px solid gray;
     padding: 18px;
-    font-size: 18px;
     margin: 10px;
     color: white;
     height: 30px;
@@ -279,7 +274,7 @@ th {
 }
 .image_info_breed-name {
     text-align: center;
-    font-size: 2em;
+    font-size: 36px;
     text-decoration: underline;
 }
 .tag {
