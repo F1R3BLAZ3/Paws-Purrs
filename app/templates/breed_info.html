@@ -22,9 +22,10 @@
 
 <div class="details-container">
     {% if images_info %}
-        <img style="cursor: pointer;" src="{{ images_info[0].url }}" alt="{{ breed_info.name }}" onclick="openModal('{{ images_info[0].url }}')">
+    <img style="cursor: pointer;" src="{{ images_info[0].url }}" alt="{{ breed_info.name }}"
+        onclick="openModal('{{ images_info[0].url }}')">
     {% else %}
-        <img src="{{ url_for('static', filename='images/dog404.png') }}" alt="No Dog Image">
+    <img src="{{ url_for('static', filename='images/dog404.png') }}" alt="No Dog Image">
     {% endif %}
     <div>
         <h1 class="image_info_breed-name">{{ breed_info.name }}</h1>
@@ -32,24 +33,24 @@
         <ul>
             <li><strong>Origin:</strong>
                 {% if breed_info.origin %}
-                    {{ breed_info.origin }}
+                {{ breed_info.origin }}
                 {% else %}
-                    N/A
+                N/A
                 {% endif %}
             </li>
 
             <li><strong>Bred for:</strong>
                 {% if breed_info.bred_for %}
-                    {% for temperament in breed_info.bred_for.split(",") %}
-                        {% set words = temperament.strip().capitalize().split() %}
-                        {% if words|length > 2 %}
-                            <div class="tag">{{ words[:5]|join(' ') }}</div>
-                        {% else %}
-                            <div class="tag">{{ temperament.strip().capitalize().rstrip('.') }}</div>
-                        {% endif %}
-                    {% endfor %}
+                {% for temperament in breed_info.bred_for.split(",") %}
+                {% set words = temperament.strip().capitalize().split() %}
+                {% if words|length > 2 %}
+                <div class="tag">{{ words[:5]|join(' ') }}</div>
                 {% else %}
-                    N/A
+                <div class="tag">{{ temperament.strip().capitalize().rstrip('.') }}</div>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                N/A
                 {% endif %}
             </li>
 
@@ -57,15 +58,15 @@
             <li><strong>Life span:</strong> {{ breed_info.life_span }}</li>
             <li><strong>Temperament:</strong>
                 {% if 'temperament' in breed_info %}
-                    {% set temperament_list = breed_info.temperament.split(",") %}
-                     <!-- In case the number of tags displayed is not satisfactory, you can change them here -->
-                    {% for temperament in temperament_list[:5] %}
-                        <div class="tag">{{ temperament }}</div>
-                    {% endfor %}
+                {% set temperament_list = breed_info.temperament.split(",") %}
+                <!-- In case the number of tags displayed is not satisfactory, you can change them here -->
+                {% for temperament in temperament_list[:5] %}
+                <div class="tag">{{ temperament }}</div>
+                {% endfor %}
                 {% else %}
-                    N/A 
+                N/A
                 {% endif %}
-            </li>          
+            </li>
         </ul>
         <h2 style="text-decoration: underline">Measurements</h2>
         <table>
@@ -74,7 +75,7 @@
                 <th>Imperial</th>
                 <th>Metric</th>
             </tr>
-            <tr>    
+            <tr>
                 <td><strong>Weight:</strong></td>
                 <td>{{ breed_info.weight.imperial }} lb</td>
                 <td>{{ breed_info.weight.metric }} kg</td>
@@ -90,29 +91,51 @@
 <div class="image-grid">
     {% for image in images_info[1:] %}
     <div class="img-container" onclick="openModal('{{ image.url }}')">
-        <img src="{{ image.url }}" alt="{{ breed_info.name }}" style="height: 244px; object-fit: cover; cursor: pointer">
+        <img src="{{ image.url }}" alt="{{ breed_info.name }}"
+            style="height: 244px; object-fit: cover; cursor: pointer">
     </div>
     {% endfor %}
 </div>
 
 <div id="myModal" class="modal">
-    <span class="close">&times;</span>
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="navigation-buttons">
+        <button onclick="changeImage(-1)">❮</button>
+        <button onclick="changeImage(1)">❯</button>
+    </div>
     <img class="modal-content" id="img01">
-    <div id="caption"></div>
-  </div>
-  <script>
-    function openModal(src) {
-  var modal = document.getElementById("myModal");
-  var modalImg = document.getElementById("img01");
+</div>
 
-  modal.style.display = "block";
-  modalImg.src = src;
+<script>
+    var currentImageIndex = 0;
+    var imagesInfo = {{ images_info| tojson | safe }};
 
-  var span = document.getElementsByClassName("close")[0];
+    function openModal(index) {
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("img01");
 
-  span.onclick = function() { 
-    modal.style.display = "none";
-  }
-}
-  </script>
+        modal.style.display = "block";
+        currentImageIndex = index >= 0 && index < imagesInfo.length ? index : 0;
+        modalImg.src = imagesInfo[currentImageIndex].url;
+    }
+
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    function changeImage(offset) {
+        currentImageIndex += offset;
+        if (currentImageIndex < 0) {
+            currentImageIndex = imagesInfo.length - 1;
+        } else if (currentImageIndex >= imagesInfo.length) {
+            currentImageIndex = 0;
+        }
+        document.getElementById("img01").src = imagesInfo[currentImageIndex].url;
+    }
+
+    function nextImage() {
+        changeImage(1);
+    }
+</script>
+
 {% endblock %}
