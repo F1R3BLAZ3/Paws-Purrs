@@ -36,11 +36,11 @@ def cat_images():
         response = requests.get(api_url, headers=headers, timeout=30)
 
         response.raise_for_status()
-        dog_data = response.json()
-        formatted_data = json.dumps(dog_data, indent=2)
+        cat_data = response.json()
+        formatted_data = json.dumps(cat_data, indent=2)
 
-        # return render_template('dog_list.html', dog_data=dog_data)
-        return Response(response=formatted_data, content_type='application/json')
+        return render_template('cats/cat_list.html', cat_data=cat_data)
+        # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
@@ -61,52 +61,8 @@ def get_cat_image_info(image_id):
 
         formatted_data = json.dumps(image_info, indent=2)
 
-        # return render_template('image_info.html', image_info=image_info)
-        return Response(response=formatted_data, content_type='application/json')
-    except requests.RequestException as e:
-        return jsonify({'error': f'Request failed: {str(e)}'}), 500
-
-@app.route('/cat/images/<image_id>/analysis', methods=['GET'])
-def analyze_cat_image(image_id):
-    """Analyze a specific cat image."""
-    endpoint = f'/images/{image_id}/analysis'
-    api_url = f'{app.config["CAT_API_BASE_URL"]}{endpoint}'
-
-    headers = {
-        'x-api-key': app.config['CAT_API_KEY']
-    }
-
-    try:
-        response = requests.get(api_url, headers=headers, timeout=30)
-        response.raise_for_status()
-        analysis_data = response.json()
-
-        formatted_data = json.dumps(analysis_data, indent=2)
-
-        # return render_template('image_analysis.html', analysis_data=analysis_data)
-        return Response(response=formatted_data, content_type='application/json')
-    except requests.RequestException as e:
-        return jsonify({'error': f'Request failed: {str(e)}'}), 500
-
-@app.route('/cat/images/<image_id>/breeds', methods=['GET'])
-def get_cat_image_breeds(image_id):
-    """Retrieve breeds associated with a specific cat image"""
-    endpoint = f'/images/{image_id}/breeds'
-    api_url = f'{app.config["CAT_API_BASE_URL"]}{endpoint}'
-
-    headers = {
-        'Content-Type': 'application/json',
-    }
-
-    try:
-        response = requests.get(api_url, headers=headers, timeout=30)
-        response.raise_for_status()
-        breeds_data = response.json()
-
-        formatted_data = json.dumps(breeds_data, indent=2)
-
-        # return render_template('image_breeds.html', breeds_data=breeds_data)
-        return Response(response=formatted_data, content_type='application/json')
+        return render_template('cats/image_info.html', image_info=image_info)
+        # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
@@ -134,8 +90,8 @@ def get_cat_breeds():
 
         formatted_data = json.dumps(breeds_data, indent=2)
 
-        # return render_template('cat_breeds_list.html', breeds_data=breeds_data)
-        return Response(response=formatted_data, content_type='application/json')
+        return render_template('cats/cat_breeds.html', breeds_data=breeds_data)
+        # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
@@ -169,9 +125,9 @@ def get_cat_breed_info(breed_id):
         next_breed_id = breed_id + 1
         prev_breed_id = breed_id - 1 if breed_id > 1 else None
 
-        # return render_template('breed_info.html', breed_info=breed_info, images_info=images_info,
-                               #next_breed_id=next_breed_id, prev_breed_id=prev_breed_id)
-        return Response(response=formatted_data, content_type='application/json')
+        return render_template('cats/breed_info.html', breed_info=breed_info, images_info=images_info,
+                               next_breed_id=next_breed_id, prev_breed_id=prev_breed_id)
+        # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 

@@ -391,3 +391,66 @@ th {
 .navigation-buttons button:hover {
     color: #bbb;
 }
+
+  /* CATS INFO PAGE */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+    margin-top: 20px;
+
+}
+.trait {
+    width: 40%;
+}
+.rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin-top: 30px;
+
+}
+.circle {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 2px;
+    border: 1px solid white
+}
+.filled {
+    background-color: #2647aa;
+    border: none;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+}
+
+.cat_details-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+
+}
+
+.cat_details-container img {
+    max-width: 50%;
+    object-fit: contain;
+    height: 490px;
+    width: 100%;
+}
+
+.cat_details-container div {
+    max-width: 50%;
+}
+
+.cat_details-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cat_details-container li {
+    margin-bottom: 1em;
+}
+  
