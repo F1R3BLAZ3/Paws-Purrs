@@ -95,7 +95,7 @@ def get_cat_breeds():
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
-@app.route('/cat/breeds/<int:breed_id>', methods=['GET'])
+@app.route('/cat/breeds/<breed_id>', methods=['GET'])
 def get_cat_breed_info(breed_id):
     """Retrieve information about a specific cat breed."""
     endpoint = f'/breeds/{breed_id}'
@@ -121,9 +121,6 @@ def get_cat_breed_info(breed_id):
         images_info = images_response.json()
 
         formatted_data = json.dumps(breed_info, indent=2)
-
-        next_breed_id = breed_id + 1
-        prev_breed_id = breed_id - 1 if breed_id > 1 else None
 
         return render_template('cats/breed_info.html', breed_info=breed_info, images_info=images_info,
                                next_breed_id=next_breed_id, prev_breed_id=prev_breed_id)

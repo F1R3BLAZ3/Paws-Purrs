@@ -44,8 +44,8 @@ def dog_images():
         dog_data = response.json()
         formatted_data = json.dumps(dog_data, indent=2)
 
-        # return render_template('dogs/dog_list.html', dog_data=dog_data)
-        return Response(response=formatted_data, content_type='application/json')
+        return render_template('dogs/dog_list.html', dog_data=dog_data)
+        # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
