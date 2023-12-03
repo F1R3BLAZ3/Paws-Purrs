@@ -7,13 +7,12 @@
 {% endblock %}
 
 {% block content %}
-<input type="text" id="searchBar" onkeyup="searchFunction()" placeholder="Search for breeds...">
+<input type="text" id="searchBar" onkeyup="searchFunction()" placeholder="Search for dog breeds...">
 <div class="grid-container" id="breedList">
     {% for breed in breeds_data %}
     <a href="{{ url_for('get_breed_info', breed_id=breed.id) }}" class="breed-link">
         <div class="grid-item">
             <p class="breed-name">{{ breed.name }}</p>
-            <p>{{ breed.origin }}</p>
         </div>
     </a>
    
