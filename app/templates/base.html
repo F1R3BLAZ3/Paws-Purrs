@@ -14,16 +14,19 @@
         </div>
 
         <div class="auth-buttons">
-            <button  onclick="location.href='{{url_for('get_dog_breeds')}}'">Dog Breeds</button>
-            <button  onclick="location.href='{{url_for('get_cat_breeds')}}'">Cat Breeds</button>
-        </div>
-
-        <div class="auth-buttons">
-            <button onclick="location.href='/signup'">Sign Up</button>
-            <button onclick="location.href='/signin'">Sign In</button>
-        </div>
+            <select id="gallery" onchange="location = this.value;">
+                <option value="" disabled selected>Pet Gallery</option>
+                <option value="{{url_for('dog_images')}}">Dog Breeds</option>
+                <option value="{{url_for('cat_images')}}">Cat Breeds</option>
+            </select>
+            <select id="breeds" onchange="location = this.value;">
+                <option value="" disabled selected>Pet Breeds</option>
+                <option value="{{url_for('get_dog_breeds')}}">Dog Images</option>
+                <option value="{{url_for('get_cat_breeds')}}">Cats Images</option>
+            </select>
+        </div>        
+               
     </nav>
-
     <!-- Content will be inserted here -->
     {% block content %}{% endblock %}
 </body>
