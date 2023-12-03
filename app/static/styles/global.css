@@ -166,7 +166,7 @@ select option {
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 2em;
-    padding: 30px;
+    margin-bottom: 50px;
 }
 
 .details-container img {
@@ -350,7 +350,7 @@ th {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 100px;
+    padding-top: 80px;
     left: 0;
     top: 0;
     width: 100%;
@@ -362,11 +362,15 @@ th {
 }
 
 .modal-content {
+    max-height: 80vh; 
+    max-width: 80vw; 
+    width: auto;
+    height: auto;
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    object-fit: contain;
 }
+
 
 .close {
     position: absolute;

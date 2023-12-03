@@ -14,18 +14,18 @@
         </div>
 
         <div class="auth-buttons">
-            <select id="gallery" onchange="location = this.value;" onfocus="this.options[0].hidden = true;" onblur="this.options[0].hidden = false;">
-                <option value="">Pet Gallery</option>
-                <option value="{{url_for('dog_images')}}">Dog Breeds</option>
-                <option value="{{url_for('cat_images')}}">Cat Breeds</option>
-            </select>
-            <select id="breeds" onchange="location = this.value;" onfocus="this.options[0].hidden = true;" onblur="this.options[0].hidden = false;">
-                <option value="">Pet Breeds</option>
-                <option value="{{url_for('get_dog_breeds')}}">Dog Images</option>
-                <option value="{{url_for('get_cat_breeds')}}">Cats Images</option>
-            </select>
-        </div>
-              
+    <select id="gallery" onchange="location = this.value;" onfocus="this.options[0].hidden = true;" onblur="this.options[0].hidden = false;">
+        <option value="">Pet Gallery</option>
+        <option value="{{url_for('dog_images')}}">Dog Images</option>
+        <option value="{{url_for('cat_images')}}">Cat Images</option>
+    </select>
+    <select id="breeds" onchange="location = this.value;" onfocus="this.options[0].hidden = true;" onblur="this.options[0].hidden = false;">
+        <option value="">Pet Breeds</option>
+        <option value="{{url_for('get_dog_breeds')}}">Dog Breeds</option>
+        <option value="{{url_for('get_cat_breeds')}}">Cat Breeds</option>
+    </select>
+</div>
+      
                
     </nav>
     <!-- Content will be inserted here -->
