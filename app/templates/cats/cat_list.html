@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Dog Gallery{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block content %}
+
+<h1 class="header">The Showcase of Feline Majesty</h1>
+<h2 class="subheader">Celebrating the elegance and enhancement of our feline friends</h2>
+
+<div class="dog-gallery-container">
+    {% for cat in cat_data %}
+        <div class="dog-card">
+            <a href="{{ url_for('get_cat_image_info', image_id=cat.id) }}"">
+                <img src="{{ cat.url }}" alt="Cat Image">
+                <div class="overlay">
+                    <p class="breed-name">{{ cat.breeds[0].name }}</p>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

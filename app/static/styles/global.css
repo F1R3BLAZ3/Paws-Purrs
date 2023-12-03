@@ -45,16 +45,28 @@ nav {
 .auth-buttons {
     display: flex;
     align-items: center;
+    justify-content: space-between; 
 }
 
-.auth-buttons button {
-    margin-left: 10px;
-    padding: 8px 16px;
-    cursor: pointer;
-    background-color: #2647aa;
+select {
+    font-size: 20px; 
+    padding: 10px; 
+    text-align-last:center; 
+}
+
+select option {
+    margin: 20px 0; 
+    padding: 10px 0; 
+}
+
+
+.auth-buttons select {
+    border: none; 
+    font-size: 1.2em; 
+    margin: 0 10px; 
+    background-color: #333;
     color: white;
-    border: none;
-    border-radius: 4px;
+    outline: none;
 }
 
 /* HOME PAGE CSS */
@@ -154,7 +166,7 @@ nav {
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 2em;
-    padding: 30px;
+    margin-bottom: 50px;
 }
 
 .details-container img {
@@ -338,7 +350,7 @@ th {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 100px;
+    padding-top: 80px;
     left: 0;
     top: 0;
     width: 100%;
@@ -350,11 +362,15 @@ th {
 }
 
 .modal-content {
+    max-height: 80vh; 
+    max-width: 80vw; 
+    width: auto;
+    height: auto;
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    object-fit: contain;
 }
+
 
 .close {
     position: absolute;
@@ -390,4 +406,66 @@ th {
 
 .navigation-buttons button:hover {
     color: #bbb;
+}
+
+  /* CATS INFO PAGE */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+    margin-top: 20px;
+
+}
+.trait {
+    width: 40%;
+}
+.rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin-top: 30px;
+
+}
+.circle {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 2px;
+    border: 1px solid white
+}
+.filled {
+    background-color: #2647aa;
+    border: none;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+}
+
+.cat_details-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+
+}
+
+.cat_details-container img {
+    max-width: 50%;
+    object-fit: contain;
+    height: 490px;
+    width: 100%;
+}
+
+.cat_details-container div {
+    max-width: 50%;
+}
+
+.cat_details-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cat_details-container li {
+    margin-bottom: 1em;
 }

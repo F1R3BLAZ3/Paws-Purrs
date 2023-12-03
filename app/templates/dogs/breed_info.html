@@ -20,6 +20,11 @@
     {% endif %}
 </div>
 
+<div style="margin-top: 100px; margin-left: 20px; margin-right: 20px;">
+    <h1 style="font-size: 60px; margin-bottom: 0;">{{ breed_info.name }}</h1>
+    <h2 style="font-size: 32px; color: gray;">{{ breed_info.origin }}</h2> 
+</div>
+
 <div class="details-container">
     {% if images_info %}
     <img style="cursor: pointer;" src="{{ images_info[0].url }}" alt="{{ breed_info.name }}"
@@ -28,17 +33,8 @@
     <img src="{{ url_for('static', filename='images/dog404.png') }}" alt="No Dog Image">
     {% endif %}
     <div>
-        <h1 class="image_info_breed-name">{{ breed_info.name }}</h1>
         <h2 style="text-decoration: underline">Details</h2>
         <ul>
-            <li><strong>Origin:</strong>
-                {% if breed_info.origin %}
-                {{ breed_info.origin }}
-                {% else %}
-                N/A
-                {% endif %}
-            </li>
-
             <li><strong>Bred for:</strong>
                 {% if breed_info.bred_for %}
                 {% for temperament in breed_info.bred_for.split(",") %}
@@ -88,7 +84,10 @@
         </table>
     </div>
 </div>
-<div class="image-grid">
+
+<hr style="border-top: 1px solid gray; margin: auto; width: 50%">
+
+<div class="image-grid" style="margin-top: 30px;">
     {% for image in images_info[1:] %}
     <div class="img-container" onclick="openModal('{{ image.url }}')">
         <img src="{{ image.url }}" alt="{{ breed_info.name }}"

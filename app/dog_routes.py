@@ -44,32 +44,8 @@ def dog_images():
         dog_data = response.json()
         formatted_data = json.dumps(dog_data, indent=2)
 
-        return render_template('dog_list.html', dog_data=dog_data)
+        return render_template('dogs/dog_list.html', dog_data=dog_data)
         # return Response(response=formatted_data, content_type='application/json')
-    except requests.RequestException as e:
-        return jsonify({'error': f'Request failed: {str(e)}'}), 500
-
-
-@app.route('/dog/images/random', methods=['GET'])
-def get_random_dog_images():
-    """Retrieve random dog images from the Dog API."""
-    endpoint = '/images/search'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
-
-    headers = {
-        'Content-Type': 'application/json',
-        'x-api-key': app.config['DOG_API_KEY']
-    }
-
-    try:
-        response = requests.get(api_url, headers=headers, timeout=30)
-        response.raise_for_status()
-        dog_data = response.json()
-
-        formatted_data = json.dumps(dog_data, indent=2)
-
-        #return render_template('dog_images.html', dog_data=dog_data)
-        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
@@ -90,52 +66,8 @@ def get_dog_image_info(image_id):
 
         formatted_data = json.dumps(image_info, indent=2)
 
-        return render_template('image_info.html', image_info=image_info)
+        return render_template('dogs/image_info.html', image_info=image_info)
         # return Response(response=formatted_data, content_type='application/json')
-    except requests.RequestException as e:
-        return jsonify({'error': f'Request failed: {str(e)}'}), 500
-
-@app.route('/dog/images/<image_id>/analysis', methods=['GET'])
-def analyze_dog_image(image_id):
-    """Analyze a specific dog image."""
-    endpoint = f'/images/{image_id}/analysis'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
-
-    headers = {
-        'x-api-key': app.config['DOG_API_KEY']
-    }
-
-    try:
-        response = requests.get(api_url, headers=headers, timeout=30)
-        response.raise_for_status()
-        analysis_data = response.json()
-
-        formatted_data = json.dumps(analysis_data, indent=2)
-
-        # return render_template('image_analysis.html', analysis_data=analysis_data)
-        return Response(response=formatted_data, content_type='application/json')
-    except requests.RequestException as e:
-        return jsonify({'error': f'Request failed: {str(e)}'}), 500
-
-@app.route('/dog/images/<image_id>/breeds', methods=['GET'])
-def get_dog_image_breeds(image_id):
-    """Retrieve breeds associated with a specific dog image"""
-    endpoint = f'/images/{image_id}/breeds'
-    api_url = f'{app.config["DOG_API_BASE_URL"]}{endpoint}'
-
-    headers = {
-        'Content-Type': 'application/json',
-    }
-
-    try:
-        response = requests.get(api_url, headers=headers, timeout=30)
-        response.raise_for_status()
-        breeds_data = response.json()
-
-        formatted_data = json.dumps(breeds_data, indent=2)
-
-        # return render_template('image_breeds.html', breeds_data=breeds_data)
-        return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 
@@ -163,7 +95,7 @@ def get_dog_breeds():
 
         formatted_data = json.dumps(breeds_data, indent=2)
 
-        return render_template('breeds.html', breeds_data=breeds_data)
+        return render_template('dogs/breeds.html', breeds_data=breeds_data)
         # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
@@ -198,7 +130,7 @@ def get_breed_info(breed_id):
         next_breed_id = breed_id + 1
         prev_breed_id = breed_id - 1 if breed_id > 1 else None
 
-        return render_template('breed_info.html', breed_info=breed_info, images_info=images_info,
+        return render_template('dogs/breed_info.html', breed_info=breed_info, images_info=images_info,
                                next_breed_id=next_breed_id, prev_breed_id=prev_breed_id)
         # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:

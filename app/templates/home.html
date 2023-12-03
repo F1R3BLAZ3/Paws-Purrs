@@ -10,7 +10,7 @@
 {% block content %}
     <div class="home-container">
         <div class="left-section">
-            <h1>We’re passionate about our furry friends and so are you!!!</h1>
+            <h1 style="font-size: 60px;">We’re passionate about our furry friends and so are you!!!</h1>
             <p>
                 That’s why we’ve created a platform that brings you a wealth
                 of information and adorable images of your favorite pets.
@@ -25,7 +25,7 @@
                 Enjoy the journey, fellow pet lover! 🐶🐱
             </p>
             <div class="browse-buttons">
-                <button onclick="location.href='/browse/cats'">Cat Gallery</button>
+                <button onclick="location.href='{{url_for('cat_images')}}'">Cat Gallery</button>
                 <button onclick="location.href='{{url_for('dog_images')}}'">Dog Gallery</button>
             </div>
         </div>

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}cat Image Details{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block content %}
+<div style="margin-top: 100px; margin-left: 20px; margin-right: 20px;">
+    <h1 style="font-size: 60px; margin-bottom: 0;">{{ image_info.breeds[0].name }}</h1>
+    <h2 style="font-size: 32px; color: gray;">{{ image_info.breeds[0].origin }}</h2> 
+</div>
+
+<div class="cat_details-container">
+    {% if image_info %}
+        <img src="{{ image_info.url }}" alt="{{ image_info.breeds[0].name }}">
+    {% else %}      
+        <img src="{{ url_for('static', filename='images/cat404.png') }}" alt="No Cat Image">
+    {% endif %}
+
+    <div style="width: 40%;">
+        <table>
+            <tr>
+                <th>Traits of the {{ image_info.breeds[0].name }}</th>
+                <th>Rating</th>
+            </tr>
+            {% for trait in ['adaptability', 'affection_level', 'child_friendly', 'dog_friendly', 'energy_level', 'grooming', 'health_issues', 'intelligence', 'shedding_level', 'social_needs', 'stranger_friendly'] %}
+                <tr>
+                    <td>{{ trait.replace('_', ' ').capitalize() }}</td>
+                    <td>
+                        {% for i in range(1, 6) %}
+                            {% if i <= image_info.breeds[0][trait] %}
+                                <span class="circle filled"></span>
+                            {% else %}
+                                <span class="circle"></span>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+<hr style="border-top: 1px solid gray; margin: auto; width: 50%">
+
+<div class="cat_details-container">
+    <ul style="width: 50%;">  
+        <li style="line-height: 24px;">{{image_info.breeds[0].description}}</li>
+        <li style="color: gray;"><strong>Life span:</strong> {{ image_info.breeds[0].life_span }} years</li>
+        <li style="color: gray;"><strong>Weight: </strong>{{ image_info.breeds[0].weight.imperial }} lb / {{ image_info.breeds[0].weight.metric }} kg</li>
+        <li>
+            {% if 'temperament' in image_info.breeds[0] %}
+                {% set temperament_list = image_info.breeds[0].temperament.split(",") %}
+                {% for temperament in temperament_list[:5] %}
+                    <div class="tag">{{ temperament }}</div>
+                {% endfor %}
+            {% else %}
+                N/A 
+            {% endif %}
+        </li> 
+    </ul>
+    <div style="width: 40%;">
+        <table>
+            <tr>
+                <th>How the {{ image_info.breeds[0].name }} is like</th>
+                <th>Value</th>
+            </tr>
+            {% for trait in ['lap', 'grooming', 'experimental', 'indoor', 'vocalisation', 'experimental', 'hairless', 'natural', 'rare', 'rex', 'suppressed_tail', 'short_legs', 'hypoallergenic'] %}
+                <tr>
+                    <td>{{ trait.replace('_', ' ').capitalize() }}</td>
+                    <td>
+                        {% if image_info.breeds[0][trait] == 1 %}
+                            Yes
+                        {% else %}
+                            No
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
