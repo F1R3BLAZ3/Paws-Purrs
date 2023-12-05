@@ -8,7 +8,13 @@ from . import app
 @app.route('/')
 def home():
     """Render the home page."""
+    return render_template('landing.html')
+
+@app.route('/home')
+def home():
+    """Render the home page."""
     return render_template('home.html')
+
 
 # This route can be altered later to request dog images in a specific order,
 # depending on the functionality of the app
