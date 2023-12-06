@@ -87,7 +87,7 @@ def get_cat_breeds():
         response = requests.get(api_url, headers=headers, timeout=30)
         response.raise_for_status()
         breeds_data = response.json()
-        
+
         formatted_data = json.dumps(breeds_data, indent=2)
 
         return render_template('cats/cat_breeds.html', breeds_data=breeds_data)
@@ -117,7 +117,8 @@ def get_cat_breed_info(breed_id):
         breed_info = response.json()
 
         # Fetch all breeds to find adjacent breed_ids
-        all_breeds_response = requests.get(f'{app.config["CAT_API_BASE_URL"]}/breeds', headers=headers, timeout=30)
+        all_breeds_response = requests.get(f'{app.config["CAT_API_BASE_URL"]}/breeds',
+                                           headers=headers, timeout=30)
         all_breeds_response.raise_for_status()
         all_breeds = all_breeds_response.json()
 
@@ -130,7 +131,9 @@ def get_cat_breed_info(breed_id):
         images_response.raise_for_status()
         images_info = images_response.json()
 
-        return render_template('cats/cat_breed_info.html', breed_info=breed_info, images_info=images_info, prev_breed_id=prev_breed_id, next_breed_id=next_breed_id)
+        return render_template('cats/cat_breed_info.html', breed_info=breed_info,
+                               images_info=images_info, prev_breed_id=prev_breed_id,
+                               next_breed_id=next_breed_id)
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
 

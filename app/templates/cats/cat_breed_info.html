@@ -145,15 +145,22 @@
         changeImage(1);
     }
 
-     var prevImage = document.querySelector('.navigation a:first-child img');
+    var prevBreedId = "{{ prev_breed_id }}";
+    var nextBreedId = "{{ next_breed_id }}";
+
+    var prevImage = document.querySelector('.navigation a:first-child img');
     var nextImage = document.querySelector('.navigation a:last-child img');
 
     prevImage.addEventListener('click', function () {
-        window.location.href = "{{ url_for('get_cat_breed_info', breed_id=prev_breed_id) }}";
+        if (prevBreedId) {
+            window.location.href = "{{ url_for('get_cat_breed_info', breed_id=prevBreedId) }}";
+        }
     });
 
     nextImage.addEventListener('click', function () {
-        window.location.href = "{{ url_for('get_cat_breed_info', breed_id=next_breed_id) }}";
+        if (nextBreedId) {
+            window.location.href = "{{ url_for('get_cat_breed_info', breed_id=nextBreedId) }}";
+        }
     });
 </script>
 
