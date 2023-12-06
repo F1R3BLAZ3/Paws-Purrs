@@ -6,7 +6,7 @@ import requests
 from . import app
 
 @app.route('/')
-def home():
+def landing():
     """Render the home page."""
     return render_template('landing.html')
 
@@ -136,8 +136,9 @@ def get_breed_info(breed_id):
         next_breed_id = breed_id + 1
         prev_breed_id = breed_id - 1 if breed_id > 1 else None
 
-        return render_template('dogs/breed_info.html', breed_info=breed_info, images_info=images_info,
-                               next_breed_id=next_breed_id, prev_breed_id=prev_breed_id)
+        return render_template('dogs/breed_info.html', breed_info=breed_info,
+                               images_info=images_info, next_breed_id=next_breed_id,
+                               prev_breed_id=prev_breed_id)
         # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
