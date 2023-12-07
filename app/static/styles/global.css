@@ -469,3 +469,34 @@ th {
 .cat_details-container li {
     margin-bottom: 1em;
 }
+
+/* LANDING PAGE */
+.section-buttons button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.feature {
+    margin-bottom: 20px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.social-links li {
+    margin: 0 10px;
+}
+
+.social-links li a img {
+    width: 24px;
+    height: 24px;
+}
