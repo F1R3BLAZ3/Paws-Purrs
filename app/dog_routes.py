@@ -7,12 +7,12 @@ from . import app
 
 @app.route('/')
 def landing():
-    """Render the home page."""
+    """Render the landing page."""
     return render_template('landing.html')
 
 @app.route('/home')
 def home():
-    """Render the home page."""
+    """Render the home page.""" 
     return render_template('home.html')
 
 
