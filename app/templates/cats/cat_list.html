@@ -14,10 +14,10 @@
 <div class="dog-gallery-container">
     {% for cat in cat_data %}
         <div class="dog-card">
-            <a href="{{ url_for('get_cat_image_info', image_id=cat.id) }}"">
+            <a href="{{ url_for('get_cat_image_info', image_id=cat.id) }}">
                 <img src="{{ cat.url }}" alt="Cat Image">
                 <div class="overlay">
-                    <p class="breed-name">{{ cat.breeds[0].name }}</p>
+                    <p class="breed-name">{{ cat.breeds[0].name | default('Unknown')}}</p>
                 </div>
             </a>
         </div>
