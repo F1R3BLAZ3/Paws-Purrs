@@ -1,68 +1,77 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %}Dog Breeds{% endblock %} {% block
+styles %}
+<!-- Add any additional CSS styles for this template if needed -->
+{% endblock %} {% block content %}
+<!-- Search Bar for Dog Breeds -->
+<input
+  type="text"
+  id="searchBar"
+  onkeyup="searchFunction()"
+  placeholder="Search for dog breeds..."
+/>
 
-{% block title %}Dog Breeds{% endblock %}
-
-{% block styles %}
-
-{% endblock %}
-
-{% block content %}
-<input type="text" id="searchBar" onkeyup="searchFunction()" placeholder="Search for dog breeds...">
+<!-- Grid Container for Breed List -->
 <div class="grid-container" id="breedList">
-    {% for breed in breeds_data %}
-    <a href="{{ url_for('get_breed_info', breed_id=breed.id) }}" class="breed-link">
-        <div class="grid-item">
-            <p class="breed-name">{{ breed.name }}</p>
-        </div>
-    </a>
-   
-    {% endfor %}
+  {% for breed in breeds_data %}
+  <!-- Breed Link with Grid Item -->
+  <a
+    href="{{ url_for('get_breed_info', breed_id=breed.id) }}"
+    class="breed-link"
+  >
+    <div class="grid-item">
+      <!-- Display Breed Name -->
+      <p class="breed-name">{{ breed.name }}</p>
+    </div>
+  </a>
+  {% endfor %}
 </div>
 
+<!-- JavaScript Script for Live Search Functionality -->
 <script>
-function searchFunction() {
+  function searchFunction() {
     // Get the input field and its value
-    var input = document.getElementById('searchBar');
+    var input = document.getElementById("searchBar");
     var filter = input.value;
 
     // Make an AJAX call to your search route
-    fetch('/dog/breeds/search?q=' + filter)
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(data) {
-            // Clear the breed list container
-            var container = document.getElementById('breedList');
-            container.innerHTML = '';
+    fetch("/dog/breeds/search?q=" + filter)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        // Clear the breed list container
+        var container = document.getElementById("breedList");
+        container.innerHTML = "";
 
-            // Loop through the search results and add them to the breed list container
-            for (var i = 0; i < data.length; i++) {
-                var breed = data[i];
+        // Loop through the search results and add them to the breed list container
+        for (var i = 0; i < data.length; i++) {
+          var breed = data[i];
 
-                var breedLink = document.createElement('a');
-                breedLink.href = '/dog/breeds/' + breed.id;
-                breedLink.className = 'breed-link';
+          var breedLink = document.createElement("a");
+          breedLink.href = "/dog/breeds/" + breed.id;
+          breedLink.className = "breed-link";
 
-                var gridItem = document.createElement('div');
-                gridItem.className = 'grid-item';
+          var gridItem = document.createElement("div");
+          gridItem.className = "grid-item";
 
-                var breedName = document.createElement('p');
-                breedName.className = 'breed-name';
-                breedName.textContent = breed.name;
+          var breedName = document.createElement("p");
+          breedName.className = "breed-name";
+          breedName.textContent = breed.name;
 
-                var breedOrigin = document.createElement('p');
-                breedOrigin.textContent = breed.origin;
+          // Optionally, display additional information like breed origin
+          var breedOrigin = document.createElement("p");
+          breedOrigin.textContent = breed.origin;
 
-                gridItem.appendChild(breedName);
-                gridItem.appendChild(breedOrigin);
-                breedLink.appendChild(gridItem);
-                container.appendChild(breedLink);
-            }
-        })
-        .catch(function(error) {
-            console.error('Error:', error);
-        });
-}
-
+          gridItem.appendChild(breedName);
+          // Optionally, append breed origin to grid item
+          gridItem.appendChild(breedOrigin);
+          breedLink.appendChild(gridItem);
+          container.appendChild(breedLink);
+        }
+      })
+      .catch(function (error) {
+        console.error("Error:", error);
+      });
+  }
 </script>
 {% endblock %}

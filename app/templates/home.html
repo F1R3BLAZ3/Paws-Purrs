@@ -1,37 +1,51 @@
-{% extends 'base.html' %}
-
-{% block title %}Home{% endblock %}
-
-{% block styles %}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico|Dancing+Script|Lobster|Great+Vibes|Calligraffitti&display=swap">
-
-{% endblock %}
-
-{% block content %}
-    <div class="home-container">
-        <div class="left-section">
-            <h1 style="font-size: 60px;">We’re passionate about our furry friends and so are you!!!</h1>
-            <p>
-                That’s why we’ve created a platform that brings you a wealth
-                of information and adorable images of your favourite pets.
-            </p>
-            <p>
-                Whether you’re looking for a specific breed, want to learn more
-                about your pet’s behaviour, or just want to see some cute pet
-                pictures, we’ve got you covered.
-            </p>
-            <p>
-                Dive in and explore the wonderful world of pets with us.
-                Enjoy the journey, fellow pet lover! 🐶🐱
-            </p>
-            <div class="browse-buttons">
-                <button onclick="location.href='{{url_for('cat_images')}}'">Cat Gallery</button>
-                <button onclick="location.href='{{url_for('dog_images')}}'">Dog Gallery</button>
-            </div>
-        </div>
-        <div class="right-section">
-            <!-- Image goes here -->
-            <img src="../static/images/home.png" alt="Pet Image" style="width: 650px; height: 650px">
-        </div>
+{% extends 'base.html' %} {% block title %}Home{% endblock %} {% block styles %}
+<!-- External Fonts Link -->
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Pacifico|Dancing+Script|Lobster|Great+Vibes|Calligraffitti&display=swap"
+/>
+{% endblock %} {% block content %}
+<!-- Home Content Container -->
+<div class="home-container">
+  <!-- Left Section with Text Content -->
+  <div class="left-section">
+    <!-- Main Heading -->
+    <h1 style="font-size: 60px">
+      We’re passionate about our furry friends and so are you!!!
+    </h1>
+    <!-- Paragraphs with Information -->
+    <p>
+      That’s why we’ve created a platform that brings you a wealth of
+      information and adorable images of your favourite pets.
+    </p>
+    <p>
+      Whether you’re looking for a specific breed, want to learn more about your
+      pet’s behaviour, or just want to see some cute pet pictures, we’ve got you
+      covered.
+    </p>
+    <p>
+      Dive in and explore the wonderful world of pets with us. Enjoy the
+      journey, fellow pet lover! 🐶🐱
+    </p>
+    <!-- Buttons for Cat and Dog Galleries -->
+    <div class="browse-buttons">
+      <button onclick="location.href='{{url_for('cat_images')}}'">
+        Cat Gallery
+      </button>
+      <button onclick="location.href='{{url_for('dog_images')}}'">
+        Dog Gallery
+      </button>
     </div>
+  </div>
+
+  <!-- Right Section with Image -->
+  <div class="right-section">
+    <!-- Image goes here -->
+    <img
+      src="../static/images/home.png"
+      alt="Pet Image"
+      style="width: 650px; height: 650px"
+    />
+  </div>
+</div>
 {% endblock %}

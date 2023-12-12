@@ -1,253 +1,270 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <!-- CSS links come here -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/global.css') }}">
-</head>
+    <!-- Link to global styles -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/global.css') }}"
+    />
+  </head>
 
-<body>
-    <!-- Shared component goes here -->
+  <body>
+    <!-- Navigation Section -->
     <nav>
-        <div class="logo">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Company Logo">
-            <div class="company-name">Paws&Purrs</div>
-        </div>
+      <!-- Logo and company name -->
+      <div class="logo">
+        <img
+          src="{{ url_for('static', filename='images/logo.png') }}"
+          alt="Company Logo"
+        />
+        <div class="company-name">Paws&Purrs</div>
+      </div>
 
-        <div class="section-buttons">
-            <button onclick="document.getElementById('features').scrollIntoView();">Features</button>
-            <button onclick="document.getElementById('about').scrollIntoView();">About</button>
-        </div>
+      <!-- Navigation buttons for scrolling to different sections -->
+      <div class="section-buttons">
+        <button onclick="document.getElementById('features').scrollIntoView();">
+          Features
+        </button>
+        <button onclick="document.getElementById('about').scrollIntoView();">
+          About
+        </button>
+      </div>
     </nav>
 
+    <!-- Home Section -->
     <div class="home-container">
-        <div class="left-section">
-            <h1 style="font-size: 84px;">Paws&Purrs</h1>
-            <p style="font-size: 39px;">
-                Discover and explore a world of adorable cat and dog breeds with our interactive image gallery,
-                powered by TheCatAPI and TheDogAPI.” 😊
+      <!-- Left section with project introduction -->
+      <div class="left-section">
+        <h1 style="font-size: 84px">Paws&Purrs</h1>
+        <p style="font-size: 39px">
+          Discover and explore a world of adorable cat and dog breeds with our
+          interactive image gallery, powered by TheCatAPI and TheDogAPI. 😊
+        </p>
+        <!-- Button to navigate to the gallery -->
+        <div class="browse-buttons">
+          <button onclick="location.href='/home'">Dive In</button>
+        </div>
+      </div>
+      <!-- Right section with an image -->
+      <div class="right-section">
+        <img
+          src="../static/images/landing.png"
+          alt="Pet Image"
+          style="width: 650px; height: 650px; border: 1px solid #fff"
+        />
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div id="features" class="home-container" style="height: 100vh">
+      <div class="left-section">
+        <h1 style="font-size: 40px">Features</h1>
+        <!-- Feature descriptions -->
+        <div class="feature-container">
+          <!-- Feature 1: Pet Gallery -->
+          <div class="feature">
+            <h2 style="text-decoration: underline">Pet Gallery</h2>
+            <p>
+              Dive into the world of adorable pets with our extensive gallery...
             </p>
-            <div class="browse-buttons">
-                <button onclick="location.href='/home'">Dive In</button>
-
-            </div>
+          </div>
+          <!-- Feature 2: Breed List and Search Bar -->
+          <div class="feature">
+            <h2 style="text-decoration: underline">
+              Breed List and Search Bar
+            </h2>
+            <p>
+              Looking for a specific breed? Use our comprehensive breed list...
+            </p>
+          </div>
+          <!-- Feature 3: Breed Info Page -->
+          <div class="feature">
+            <h2 style="text-decoration: underline">Breed Info Page</h2>
+            <p>
+              Want to learn more about a particular breed? Our Breed Info
+              Page...
+            </p>
+          </div>
         </div>
-        <div class="right-section">
-            <!-- Image goes here -->
-            <img src="../static/images/landing.png" alt="Pet Image"
-                style="width: 650px; height: 650px; border: 1px solid #808080;">
-        </div>
+      </div>
+      <!-- Right section with an image -->
+      <div class="right-section">
+        <img
+          src="../static/images/features.png"
+          alt="Pets Image"
+          style="width: 650px; height: 650px; border: 1px solid #fff"
+        />
+      </div>
     </div>
 
-    <div id="features" class="home-container" style="height: 100vh;">
-        <div class="left-section">
-            <h1 style="font-size: 40px;">Features</h1>
-            <div class="feature-container">
-                <div class="feature">
-                    <h2 style="text-decoration: underline;">Pet Gallery</h2>
-                    <p>Dive into the world of adorable pets with our extensive gallery.
-                        Explore a wide range of high-quality images showcasing the charm and beauty of various breeds of
-                        cats and dogs.
-                        Our gallery is updated regularly to ensure you never run out of your daily dose of cuteness!
-                    </p>
-                </div>
-                <div class="feature">
-                    <h2 style="text-decoration: underline;">Breed List and Search Bar</h2>
-                    <p>Looking for a specific breed? Use our comprehensive breed list and intuitive search bar to find
-                        your favorite breeds in an instant.
-                        Our database, powered by TheDogAPI and TheCatAPI, includes a vast array of breeds, ensuring you
-                        find exactly what you're looking for.
-                    </p>
-                </div>
-                <div class="feature">
-                    <h2 style="text-decoration: underline;">Breed Info Page</h2>
-                    <p>Want to learn more about a particular breed? Our Breed Info Page provides detailed information
-                        about each breed, including their characteristics,
-                        history, and care requirements. It's a one-stop destination for all your breed-related queries!
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="right-section">
-            <!-- Add an image of any gallery -->
-            <img src="../static/images/features.png" alt="Pets Image"
-                style="width: 650px; height: 650px; border: 1px solid #808080;">
-        </div>
-    </div>
-
+    <!-- Gallery Section -->
     <div class="home-container">
-        <div class="left-section">
-            <h1 style="font-size: 30px;">Gallery</h1>
-            <p>
-                The galleries are the heart of the website. It’s a visual feast for pet lovers,
-                showcasing a diverse array of cat and dog breeds in all their glory.
-                Each image in the gallery is more than just a picture;
-                it’s a window into the world of that particular breed.
-            <p>
-                Accompanying each image is the breed name, serving as a brief introduction to the pet you’re viewing.
-                Whether you’re a fan of the exotic Siamese or the massive Boerboel,
-                the gallery has something for every pet enthusiast.
-            </p>
-
-            <div class="section-buttons">
-                <button onclick="location.href='/cat/images'">Cat Gallery</button>
-                <button onclick="location.href='/dog/images'">Dog Gallery</button>
-            </div>
+      <!-- Left section with gallery description -->
+      <div class="left-section">
+        <h1 style="font-size: 30px">Gallery</h1>
+        <p>
+          The galleries are the heart of the website. It’s a visual feast for
+          pet lovers...
+        </p>
+        <!-- Buttons to navigate to specific galleries -->
+        <div class="section-buttons">
+          <button onclick="location.href='/cat/images'">Cat Gallery</button>
+          <button onclick="location.href='/dog/images'">Dog Gallery</button>
         </div>
-        <!-- Add an image of any gallery -->
-        <img src="../static/images/dog-hall-of-fame.png" alt="Pet Gallery" style="width: 65%; border: 1px solid #808080;">
+      </div>
+      <!-- Right section with an image -->
+      <img
+        src="../static/images/dog-hall-of-fame.png"
+        alt="Pet Gallery"
+        style="width: 65%; border: 1px solid #fff"
+      />
     </div>
 
+    <!-- Breed List and Search Bar Section -->
     <div class="home-container">
-        <div class="left-section" style="width: 30%;">
-            <h1 style="font-size: 30px;">Breed List and Search Bar</h1>
-            <p>
-                Our Breed List and Search Bar feature is a comprehensive directory of breeds.
-                It’s an easy-to-navigate list that provides a snapshot of the diverse breeds available.
-                But it’s more than just a list; it’s also a dynamic search tool. As you type in the search bar,
-                the list updates in real-time, filtering the breeds to match your search.
-                It’s a quick and efficient way to find and explore breeds that pique your interest.
-            </p>
-            <div class="section-buttons">
-                <button onclick="location.href='/cat/breeds'">Cat Breeds</button>
-                <button onclick="location.href='/dog/breeds'">Dog Breeds</button>
-            </div>
+      <!-- Left section with description -->
+      <div class="left-section" style="width: 30%">
+        <h1 style="font-size: 30px">Breed List and Search Bar</h1>
+        <p>
+          Our Breed List and Search Bar feature is a comprehensive directory of
+          breeds...
+        </p>
+        <!-- Buttons to navigate to specific breed lists -->
+        <div class="section-buttons">
+          <button onclick="location.href='/cat/breeds'">Cat Breeds</button>
+          <button onclick="location.href='/dog/breeds'">Dog Breeds</button>
         </div>
-        <!-- Image goes here -->
-        <img src="../static/images/search-breeds.png" alt="Search Breeds" style="width: 65%; border: 1px solid #808080;">
+      </div>
+      <!-- Right section with an image -->
+      <img
+        src="../static/images/search-breeds.png"
+        alt="Search Breeds"
+        style="width: 65%; border: 1px solid #fff"
+      />
     </div>
 
+    <!-- Breed Information Section -->
     <div class="home-container">
-        <div class="left-section" style="width: 30%;">
-            <h1 style="font-size: 30px;">Breed Information</h1>
-            <p>
-                The Breed Information feature is like a mini-encyclopedia for each cat breed.
-                When you select a breed, you’re taken to a dedicated page brimming with interesting facts and details
-                about that breed.
-                You’ll find information about the breed’s traits, giving you insights into its temperament, physical
-                characteristics,
-                and unique behaviors. But that’s not all; the page also features additional images of the breed,
-                letting you see more examples of the breed’s distinctive appearance.
-            </p>
-        </div>
-        <!-- Image goes here -->
-        <img src="../static/images/breed-info.png" alt="Breed info" style="width: 65%; border: 1px solid #808080;">
+      <!-- Left section with description -->
+      <div class="left-section" style="width: 30%">
+        <h1 style="font-size: 30px">Breed Information</h1>
+        <p>
+          The Breed Information feature is like a mini-encyclopedia for each cat
+          breed...
+        </p>
+      </div>
+      <!-- Right section with an image -->
+      <img
+        src="../static/images/breed-info.png"
+        alt="Breed info"
+        style="width: 65%; border: 1px solid #fff"
+      />
     </div>
 
-    <div id="about" class="home-container" style="height: 100vh;">
-        <div class="left-section">
-            <h1 style="font-size: 40px;">About</h1>
-            <p>
-                Our project was inspired by our shared love for cats and dogs.
-                As pet owners and animal enthusiasts, we found ourselves constantly looking up different breeds,
-                trying to understand their unique traits and characteristics.
-                We realized that while there was a wealth of information available, it wasn’t always easy to navigate or
-                visually appealing.
-                That’s when the idea for this project was born.
-            </p>
-
-            <p>
-                We wanted to create a platform that not only provided information about different cat breeds but did so
-                in a way that was engaging and user-friendly.
-                We spent countless hours brainstorming, designing, and coding to bring this idea to life.
-                This project is a testament to our passion for animals and our commitment to creating meaningful and
-                impactful digital experiences.
-            </p>
-            <p>
-                This project was completed as part of our Portfolio Project for <a target="_blank"
-                    href="https://www.holbertonschool.com/">Holberton School</a>.
-                It was a challenging but rewarding experience, and we’re proud of what we’ve accomplished.
-            </p>
-        </div>
-        <div class="right-section">
-            <!-- Image goes here -->
-            <img src="../static/images/logo.png" alt="logo" style="width: 650px; height: 650px;">
-        </div>
+    <!-- About Section -->
+    <div id="about" class="home-container" style="height: 100vh">
+      <!-- Left section with about information -->
+      <div class="left-section">
+        <h1 style="font-size: 40px">About</h1>
+        <p>
+          Our project was inspired by our shared love for cats and dogs. As pet
+          owners and animal enthusiasts...
+        </p>
+        <!-- Logo image -->
+        <p>
+          This project was completed as part of our Portfolio Project for
+          <a href="https://www.holbertonschool.com/">Holberton School</a>...
+        </p>
+      </div>
+      <!-- Right section with an image -->
+      <div class="right-section">
+        <img
+          src="../static/images/logo.png"
+          alt="logo"
+          style="width: 650px; height: 650px"
+        />
+      </div>
     </div>
 
+    <!-- Team Member Section (Zandré de Boer) -->
     <div class="home-container">
-        <div class="left-section">
-            <!--  your image goes here -->
-            <img src="../static/images/zandre.png" alt="Zandre Profile Picture"
-                style="width: 650px; height: 650px; border: 1px solid #808080;">
-        </div>
-        <div class="right-section" style="padding-left: 100px;">
-
-            <h1 style="font-size: 30px;">About Zandré de Boer</h1>
-            <p style="font-size: 20px;">
-                Zandré, based in the beautiful city of Cape Town, played a crucial role as the backend developer of the
-                project.
-                His responsibilities were manifold and vital to the successful execution of the project.
-            </p>
-            <p style="font-size: 20px;">
-                He was the mastermind behind creating the routes for the application, ensuring seamless navigation and
-                user experience.
-                He took charge of project creation, laying the foundation on which the features we built.
-                Zandré’s expertise was particularly evident in his ability to handle errors.
-                He ensured the application ran smoothly, preemptively addressing potential issues and swiftly resolving
-                any that arose.
-            </p>
-            <p style="font-size: 20px;">
-                Moreover, he was responsible for hosting the site, making the application accessible to users around the
-                world.
-                In addition to his backend development duties, Zandré also served as the resident test engineer.
-                He meticulously tested the application for any bugs or issues, ensuring that the final product was
-                polished and free of errors.
-                His contributions were invaluable to the project, and his skills as a backend developer and test
-                engineer greatly enhanced the quality of work produced.😊
-            </p>
-
-            <ul class="social-links">
-                <li><a target="_blank" href="http://www.linkedin.com/in/zandré-de-boer"><img src="../static/images/linkedin.png"
-                            alt="LinkedIn"></a></li>
-                <li><a target="_blank" href="https://github.com/F1R3BLAZ3"><img src="../static/images/github.png" alt="GitHub"></a></li>
-                <li><a target="_blank" href="https://twitter.com/ZandreDeBoer"><img src="../static/images/twitter.png"
-                            alt="Twitter"></a></li>
-            </ul>
-        </div>
+      <!-- Left section with Zandré's profile picture -->
+      <div class="left-section">
+        <!-- Zandré's profile picture -->
+        <img
+          src="../static/images/zandre.png"
+          alt="Zandre Profile Picture"
+          style="width: 650px; height: 650px; border: 1px solid #fff"
+        />
+      </div>
+      <!-- Right section with Zandré's information -->
+      <div class="right-section" style="padding-left: 100px">
+        <h1 style="font-size: 30px">About Zandré de Boer</h1>
+        <p style="font-size: 20px">
+          Zandré, based in the beautiful city of Cape Town, played a crucial
+          role as the backend developer of the project. His responsibilities...
+        </p>
+        <!-- Social links for Zandré -->
+        <ul class="social-links">
+          <li>
+            <a href="http://www.linkedin.com/in/zandré-de-boer"
+              ><img src="../static/images/linkedin.png" alt="LinkedIn"
+            /></a>
+          </li>
+          <li>
+            <a href="https://github.com/F1R3BLAZ3"
+              ><img src="../static/images/github.png" alt="GitHub"
+            /></a>
+          </li>
+          <li>
+            <a href="https://twitter.com/ZandreDeBoer"
+              ><img src="../static/images/twitter.png" alt="Twitter"
+            /></a>
+          </li>
+        </ul>
+      </div>
     </div>
 
+    <!-- Team Member Section (Duncan Moyo) -->
     <div class="home-container">
-        <div class="left-section">
-            <h1 style="font-size: 30px;">About Duncan Moyo</h1>
-            <p style="font-size: 20px;">
-                Duncan Moyo, our frontend developer, brought the application to life with his exceptional skills.
-                Based in Gweru, Zimbabwe, Duncan was the creative force behind the user interface, shaping the look and
-                feel of the application.
-                Duncan was responsible for designing and implementing the user interface.
-            </p>
-            <p style="font-size: 20px;">
-                He transformed the ideas into visually appealing layouts and screens,
-                ensuring that the application was not only functional but also aesthetically pleasing.
-                He played a crucial role in user experience design, creating intuitive navigation and seamless user
-                flows.
-                He made sure that every interaction, every click, every scroll felt natural and intuitive.
-                Duncan also handled the integration of the frontend with the backend.
-            </p>
-            <p style="font-size: 20px;">
-                He ensured that the user interface communicated effectively with the server, providing a smooth and
-                responsive user experience.
-                In addition to his frontend duties, he went through every part of the application, squashing bugs and
-                refining the user interface.
-                His passion for design and attention to detail greatly contributed to the success of our project.😊
-            </p>
-
-            <ul class="social-links">
-                <li><a target="_blank" href="http://www.linkedin.com/in/duncanmoyo"><img src="../static/images/linkedin.png"
-                            alt="LinkedIn"></a></li>
-                <li><a target="_blank" href="https://github.com/DuncanMoyo"><img src="../static/images/github.png" alt="GitHub"></a>
-                </li>
-                <li><a target="_blank" href="https://twitter.com/moyoduncan2"><img src="../static/images/twitter.png" alt="Twitter"></a>
-                </li>
-            </ul>
-
-        </div>
-        <div class="right-section">
-            <!-- Image goes here -->
-            <img src="../static/images/duncan.png" alt="Duncan Profile Picture"
-                style="width: 650px; height: 650px; border: 1px solid #808080;">
-        </div>
+      <!-- Left section with Duncan's information -->
+      <div class="left-section">
+        <h1 style="font-size: 30px">About Duncan Moyo</h1>
+        <p style="font-size: 20px">
+          Duncan Moyo, our frontend developer, brought the application to life
+          with his exceptional skills. Based in Gweru, Zimbabwe, Duncan was the
+          creative force behind the user interface, shaping the look and feel of
+          the application...
+        </p>
+        <!-- Social links for Duncan -->
+        <ul class="social-links">
+          <li>
+            <a href="http://www.linkedin.com/in/duncanmoyo"
+              ><img src="../static/images/linkedin.png" alt="LinkedIn"
+            /></a>
+          </li>
+          <li>
+            <a href="https://github.com/DuncanMoyo"
+              ><img src="../static/images/github.png" alt="GitHub"
+            /></a>
+          </li>
+          <li>
+            <a href="https://twitter.com/moyoduncan2"
+              ><img src="../static/images/twitter.png" alt="Twitter"
+            /></a>
+          </li>
+        </ul>
+      </div>
+      <!-- Right section with Duncan's profile picture -->
+      <div class="right-section">
+        <img
+          src="../static/images/duncan.png"
+          alt="Duncan Profile Picture"
+          style="width: 650px; height: 650px; border: 1px solid #fff"
+        />
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
