@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block title %}Dog Breeds{% endblock %} {% block
+styles %}
+<!-- Add any additional CSS styles for this template if needed -->
+{% endblock %} {% block content %}
+<!-- Search Bar for Dog Breeds -->
+<input
+  type="text"
+  id="searchBar"
+  onkeyup="searchFunction()"
+  placeholder="Search for dog breeds..."
+/>
+
+<!-- Grid Container for Breed List -->
+<div class="grid-container" id="breedList">
+  {% for breed in breeds_data %}
+  <!-- Breed Link with Grid Item -->
+  <a
+    href="{{ url_for('get_breed_info', breed_id=breed.id) }}"
+    class="breed-link"
+  >
+    <div class="grid-item">
+      <!-- Display Breed Name -->
+      <p class="breed-name">{{ breed.name }}</p>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<!-- JavaScript Script for Live Search Functionality -->
+<script src="{{ url_for('static', filename='js/breeds.js') }}"></script>
+
+{% endblock %}

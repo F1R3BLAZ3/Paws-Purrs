@@ -72,7 +72,7 @@ def get_dog_image_info(image_id):
 
         formatted_data = json.dumps(image_info, indent=2)
 
-        return render_template('dogs/image_info.html', image_info=image_info)
+        return render_template('dogs/dog_image_info.html', image_info=image_info)
         # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
@@ -101,7 +101,7 @@ def get_dog_breeds():
 
         formatted_data = json.dumps(breeds_data, indent=2)
 
-        return render_template('dogs/breeds.html', breeds_data=breeds_data)
+        return render_template('dogs/dog_breeds.html', breeds_data=breeds_data)
         # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
@@ -136,7 +136,7 @@ def get_breed_info(breed_id):
         next_breed_id = breed_id + 1
         prev_breed_id = breed_id - 1 if breed_id > 1 else None
 
-        return render_template('dogs/breed_info.html', breed_info=breed_info,
+        return render_template('dogs/dog_breed_info.html', breed_info=breed_info,
                                images_info=images_info, next_breed_id=next_breed_id,
                                prev_breed_id=prev_breed_id)
         # return Response(response=formatted_data, content_type='application/json')

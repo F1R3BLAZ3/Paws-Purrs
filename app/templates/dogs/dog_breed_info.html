@@ -1,0 +1,129 @@
+{% extends 'base.html' %} {% block title %}Dog Image Details{% endblock %} {%
+block styles %}
+<!-- Your styles here -->
+<!-- Add any additional CSS styles for this template if needed -->
+{% endblock %} {% block content %}
+<!-- Navigation Buttons for Previous and Next Breed -->
+<div class="navigation">
+  {% if prev_breed_id %}
+  <a href="{{ url_for('get_breed_info', breed_id=prev_breed_id) }}">
+    <img
+      src="{{ url_for('static', filename='images/back.png') }}"
+      alt="Previous Breed"
+    />
+  </a>
+  {% endif %} {% if next_breed_id %}
+  <a href="{{ url_for('get_breed_info', breed_id=next_breed_id) }}">
+    <img
+      src="{{ url_for('static', filename='images/next.png') }}"
+      alt="Next Breed"
+    />
+  </a>
+  {% endif %}
+</div>
+
+<!-- Breed Information Section -->
+<div style="margin-top: 100px; margin-left: 20px; margin-right: 20px">
+  <h1 style="font-size: 60px; margin-bottom: 0">{{ breed_info.name }}</h1>
+  <h2 style="font-size: 32px; color: gray">{{ breed_info.origin }}</h2>
+</div>
+
+<!-- Main Details Container -->
+<div class="details-container">
+  <!-- Displaying the First Dog Image (Clickable) -->
+  {% if images_info %}
+  <img
+    style="cursor: pointer"
+    src="{{ images_info[0].url }}"
+    alt="{{ breed_info.name }}"
+    onclick="openModal('{{ images_info[0].url }}')"
+  />
+  {% else %}
+  <img
+    src="{{ url_for('static', filename='images/dog404.png') }}"
+    alt="No Dog Image"
+  />
+  {% endif %}
+  <!-- Details about the Breed -->
+  <div>
+    <h2 style="text-decoration: underline">Details</h2>
+    <ul>
+      <!-- Bred for -->
+      <li>
+        <strong>Bred for:</strong>
+        {% if breed_info.bred_for %} {% for temperament in
+        breed_info.bred_for.split(",") %} {% set words =
+        temperament.strip().capitalize().split() %} {% if words|length > 2 %}
+        <div class="tag">{{ words[:5]|join(' ') }}</div>
+        {% else %}
+        <div class="tag">
+          {{ temperament.strip().capitalize().rstrip('.') }}
+        </div>
+        {% endif %} {% endfor %} {% else %} N/A {% endif %}
+      </li>
+      <!-- Breed group -->
+      <li><strong>Breed group:</strong> {{ breed_info.breed_group }}</li>
+      <!-- Life span -->
+      <li><strong>Life span:</strong> {{ breed_info.life_span }}</li>
+      <!-- Temperament -->
+      <li>
+        <strong>Temperament:</strong>
+        {% if 'temperament' in breed_info %} {% set temperament_list =
+        breed_info.temperament.split(",") %}
+        <!-- In case the number of tags displayed is not satisfactory, you can change them here -->
+        {% for temperament in temperament_list[:5] %}
+        <div class="tag">{{ temperament }}</div>
+        {% endfor %} {% else %} N/A {% endif %}
+      </li>
+    </ul>
+    <!-- Measurements Table -->
+    <h2 style="text-decoration: underline">Measurements</h2>
+    <table>
+      <tr>
+        <th></th>
+        <th>Imperial</th>
+        <th>Metric</th>
+      </tr>
+      <tr>
+        <td><strong>Weight:</strong></td>
+        <td>{{ breed_info.weight.imperial }} lb</td>
+        <td>{{ breed_info.weight.metric }} kg</td>
+      </tr>
+      <tr>
+        <td><strong>Height:</strong></td>
+        <td>{{ breed_info.height.imperial }} inch</td>
+        <td>{{ breed_info.height.metric }} cm</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- Horizontal Line -->
+<hr style="border-top: 1px solid gray; margin: auto; width: 50%" />
+
+<!-- Image Grid for Additional Dog Images -->
+<div class="image-grid" style="margin-top: 30px">
+  {% for image in images_info[1:] %}
+  <div class="img-container" onclick="openModal('{{ image.url }}')">
+    <img
+      src="{{ image.url }}"
+      alt="{{ breed_info.name }}"
+      style="height: 244px; object-fit: cover; cursor: pointer"
+    />
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Modal for Image Viewing -->
+<div id="myModal" class="modal">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <div class="navigation-buttons">
+    <button onclick="changeImage(-1)">❮</button>
+    <button onclick="changeImage(1)">❯</button>
+  </div>
+  <img class="modal-content" id="img01" />
+</div>
+
+<!-- JavaScript Script for Modal Functionality -->
+  <script src="{{ url_for('static', filename='js/breed_info.js') }}"></script>
+{% endblock %}

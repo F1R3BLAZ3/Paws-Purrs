@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% block title %}Dog Image Details{% endblock %} {%
+block styles %}
+<!-- Add any additional CSS styles for this template if needed -->
+{% endblock %} {% block content %}
+<!-- Details Container -->
+<div class="details-container">
+  <!-- Display Dog Image or Placeholder -->
+  {% if image_info %}
+  <img src="{{ image_info.url }}" alt="{{ image_info.breeds[0].name }}" />
+  {% else %}
+  <img
+    src="{{ url_for('static', filename='images/dog404.png') }}"
+    alt="No Cat Image"
+  />
+  {% endif %}
+
+  <!-- Details Section -->
+  <div>
+    <!-- Display Breed Name -->
+    <h1 class="image_info_breed-name">{{ image_info.breeds[0].name }}</h1>
+    <h1 style="text-decoration: underline">Details</h1>
+    <ul>
+      <!-- Bred For Information -->
+      <li>
+        <strong>Bred for:</strong>
+        {% if image_info.breeds[0].bred_for %} {% for temperament in
+        image_info.breeds[0].bred_for.split(",") %} {% set words =
+        temperament.strip().capitalize().split() %} {% if words|length > 2 %}
+        <div class="tag">{{ words[:5]|join(' ') }}</div>
+        {% else %}
+        <div class="tag">
+          {{ temperament.strip().capitalize().rstrip('.') }}
+        </div>
+        {% endif %} {% endfor %} {% else %} N/A {% endif %}
+      </li>
+      <!-- Breed Group Information -->
+      <li>
+        <strong>Breed group:</strong> {{ image_info.breeds[0].breed_group }}
+      </li>
+      <!-- Life Span Information -->
+      <li><strong>Life span:</strong> {{ image_info.breeds[0].life_span }}</li>
+      <!-- Temperament Information -->
+      <li>
+        <strong>Temperament:</strong>
+        {% if 'temperament' in image_info.breeds[0] %} {% set temperament_list =
+        image_info.breeds[0].temperament.split(",") %}
+        <!-- In case the number of tags displayed is not satisfactory, you can change them here -->
+        {% for temperament in temperament_list[:5] %}
+        <div class="tag">{{ temperament }}</div>
+        {% endfor %} {% else %} N/A {% endif %}
+      </li>
+    </ul>
+    <!-- Measurements Section -->
+    <h2 style="text-decoration: underline">Measurements</h2>
+    <table>
+      <tr>
+        <th></th>
+        <th>Imperial</th>
+        <th>Metric</th>
+      </tr>
+      <!-- Weight Information -->
+      <tr>
+        <td><strong>Weight:</strong></td>
+        <td>{{ image_info.breeds[0].weight.imperial }} lb</td>
+        <td>{{ image_info.breeds[0].weight.metric }} kg</td>
+      </tr>
+      <!-- Height Information -->
+      <tr>
+        <td><strong>Height:</strong></td>
+        <td>{{ image_info.breeds[0].height.imperial }} inch</td>
+        <td>{{ image_info.breeds[0].height.metric }} cm</td>
+      </tr>
+    </table>
+  </div>
+</div>
+{% endblock %}

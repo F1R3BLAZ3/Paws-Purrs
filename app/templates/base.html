@@ -1,34 +1,58 @@
 <!-- base.html -->
+
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <!-- CSS links come here -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/global.css') }}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/global.css') }}"
+    />
+  </head>
+  <body>
     <!-- Shared component goes here -->
-    <nav>
-        <div class="logo" onclick="location.href='{{url_for('home')}}'">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Company Logo">
-            <div class="company-name">Paws&Purrs</div>
-        </div>
 
-        <div class="auth-buttons">
-    <select id="gallery" onchange="location = this.value;" onfocus="this.options[0].hidden = true;" onblur="this.options[0].hidden = false;">
-        <option value="">Pet Gallery</option>
-        <option value="{{url_for('dog_images')}}">Dog Images</option>
-        <option value="{{url_for('cat_images')}}">Cat Images</option>
-    </select>
-    <select id="breeds" onchange="location = this.value;" onfocus="this.options[0].hidden = true;" onblur="this.options[0].hidden = false;">
-        <option value="">Pet Breeds</option>
-        <option value="{{url_for('get_dog_breeds')}}">Dog Breeds</option>
-        <option value="{{url_for('get_cat_breeds')}}">Cat Breeds</option>
-    </select>
-</div>
-      
-               
+    <!-- Navigation Bar -->
+    <nav>
+      <!-- Company Logo and Name (Clickable Logo) -->
+      <div class="logo" onclick="location.href='{{url_for('home')}}'">
+        <img
+          src="{{ url_for('static', filename='images/logo.png') }}"
+          alt="Company Logo"
+        />
+        <div class="company-name">Paws&Purrs</div>
+      </div>
+
+      <!-- Navigation Buttons (Select Elements) -->
+      <div class="auth-buttons">
+        <!-- Pet Gallery Dropdown -->
+        <select
+          id="gallery"
+          onchange="location = this.value;"
+          onfocus="this.options[0].hidden = true;"
+          onblur="this.options[0].hidden = false;"
+        >
+          <option value="">Pet Gallery</option>
+          <option value="{{url_for('dog_images')}}">Dog Images</option>
+          <option value="{{url_for('cat_images')}}">Cat Images</option>
+        </select>
+
+        <!-- Pet Breeds Dropdown -->
+        <select
+          id="breeds"
+          onchange="location = this.value;"
+          onfocus="this.options[0].hidden = true;"
+          onblur="this.options[0].hidden = false;"
+        >
+          <option value="">Pet Breeds</option>
+          <option value="{{url_for('get_dog_breeds')}}">Dog Breeds</option>
+          <option value="{{url_for('get_cat_breeds')}}">Cat Breeds</option>
+        </select>
+      </div>
     </nav>
+
     <!-- Content will be inserted here -->
     {% block content %}{% endblock %}
-</body>
+  </body>
 </html>
