@@ -37,10 +37,12 @@ def cat_images():
     size = request.args.get('size', 'med')               # Image size
     mime_types = request.args.get('mime_types', 'jpg')   # MIME types
     image_format = request.args.get('format', 'json')    # Response format
-    has_breeds = request.args.get('has_breeds', 'true')  # Include breeds information
+    # Include breeds information
+    has_breeds = request.args.get('has_breeds', 'true')
     order = request.args.get('order', 'RANDOM')          # Order of images
     page = request.args.get('page', '0')                 # Page number
-    limit = request.args.get('limit', '16')              # Number of images per page
+    # Number of images per page
+    limit = request.args.get('limit', '16')
 
     # Add parameters to the URL
     api_url += f'?size={size}&mime_types={mime_types}&format={image_format}' \
@@ -51,11 +53,12 @@ def cat_images():
 
         response.raise_for_status()
         cat_data = response.json()
-        formatted_data = json.dumps(cat_data, indent=2)
 
-        # Comment out the return statements as needed to swap the reponse from HTML
-        # to JSON and vice-versa
+        # Render the HTML template with the cat data
         return render_template('cats/cat_list.html', cat_data=cat_data)
+
+        # Alternatively, return a JSON response
+        # formatted_data = json.dumps(cat_data, indent=2)
         # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
@@ -89,11 +92,11 @@ def get_cat_image_info(image_id):
         response.raise_for_status()
         image_info = response.json()
 
-        formatted_data = json.dumps(image_info, indent=2)
-
-        # Comment out the return statements as needed to swap the reponse from HTML
-        # to JSON and vice-versa
+        # Render the HTML template with the image information
         return render_template('cats/cat_image_info.html', image_info=image_info)
+
+        # Alternatively, return a JSON response
+        # formatted_data = json.dumps(image_info, indent=2)
         # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
@@ -131,11 +134,11 @@ def get_cat_breeds():
         response.raise_for_status()
         breeds_data = response.json()
 
-        formatted_data = json.dumps(breeds_data, indent=2)
-
-        # Comment out the return statements as needed to swap the reponse from HTML
-        # to JSON and vice-versa
+        # Render the HTML template with the breeds information
         return render_template('cats/cat_breeds.html', breeds_data=breeds_data)
+
+        # Alternatively, return a JSON response
+        # formatted_data = json.dumps(breeds_data, indent=2)
         # return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
@@ -253,9 +256,10 @@ def search_cat_breeds():
 
         formatted_data = json.dumps(search_results, indent=2)
 
-        # Comment out the return statements as needed to swap the reponse from HTML
-        # to JSON and vice-versa
+        # Render the HTML template with search results
         # return render_template('breed_search_results.html', search_results=search_results)
+
+        # Alternatively, return a JSON response
         return Response(response=formatted_data, content_type='application/json')
     except requests.RequestException as e:
         return jsonify({'error': f'Request failed: {str(e)}'}), 500

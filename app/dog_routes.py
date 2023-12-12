@@ -268,4 +268,3 @@ def search_dog_breeds():
     except requests.RequestException as e:
         # Return a JSON response in case of a failure
         return jsonify({'error': f'Request failed: {str(e)}'}), 500
-
