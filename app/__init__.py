@@ -12,6 +12,9 @@ load_dotenv()
 
 app = Flask(__name__)
 
+# Assuming you have a 'static' folder in your project directory
+app.static_folder = 'static'
+
 # Configuration variables
 app.config['DOG_API_BASE_URL'] = 'https://api.thedogapi.com/v1'
 app.config['DOG_API_KEY'] = os.getenv('DOG_API_KEY')
