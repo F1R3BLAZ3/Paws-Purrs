@@ -39,6 +39,7 @@ Public Domain. No copywrite protection.
 If you have any questions or feedback, feel free to contact us.
 
 Duncan Moyo - [Github](https://github.com/DuncanMoyo) / [X](https://twitter.com/moyoduncan2)
+
 Zandre de Boer - [Github](https://github.com/F1R3BLAZ3) / [X](https://twitter.com/ZandreDeBoer)
 
 Enjoy exploring the wonderful world of pets with Paws&Purrs!
